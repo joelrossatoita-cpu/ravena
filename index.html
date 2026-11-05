@@ -599,6 +599,22 @@
     .js .foot:not(.in) .foot__bg img { transform: none; }
   }
 /* FOOT:CSS:END */
+
+  /* ---------- Transições entre seções: cada página ocupa a tela e entra suave ---------- */
+  @media (min-width: 821px) {
+    .p2, .p3, .p4 {
+      min-height: calc(100svh - var(--navh));
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .p3 { padding-top: clamp(24px, 3vw, 48px); padding-bottom: clamp(32px, 4vw, 64px); }
+    .p4 { padding-top: clamp(24px, 3vw, 48px); padding-bottom: clamp(32px, 4vw, 64px); }
+  }
+  .js .sec-fade > * { transition: opacity .9s var(--ease, ease), transform .9s var(--ease, ease); }
+  .js .sec-fade:not(.sec-in) > * { opacity: 0; transform: translateY(28px); }
+  @media (prefers-reduced-motion: reduce) {
+    .js .sec-fade > * { transition: none; }
+    .js .sec-fade:not(.sec-in) > * { opacity: 1; transform: none; }
+  }
 </style>
 </head>
 <body>
@@ -1323,5 +1339,69 @@
 })();
 </script>
 <!-- NAV:JS:END -->
+<script>
+(() => {
+  const secs = [...document.querySelectorAll('.p2, .p3, .p4')];
+  if (!secs.length || !('IntersectionObserver' in window)) return;
+  document.documentElement.classList.add('js');
+  secs.forEach(x => x.classList.add('sec-fade'));
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('sec-in'); io.unobserve(e.target); }
+  }), { threshold: .12 });
+  secs.forEach(x => io.observe(x));
+})();
+</script>
+<script>
+(() => {
+  // A cada gesto de rolagem, vai para a seção seguinte (ou anterior). Só no desktop.
+  const mq = matchMedia('(min-width: 821px) and (prefers-reduced-motion: no-preference)');
+  const navh = () => parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--navh')) || 76;
+  let travado = false, acum = 0, tAcum;
+
+  // Pontos de parada: início de cada seção; se a seção é mais alta que a tela, também o fim dela.
+  const pontos = () => {
+    const max = document.documentElement.scrollHeight - innerHeight, n = navh(), out = [0];
+    document.querySelectorAll('main > section, footer.foot').forEach(sec => {
+      const r = sec.getBoundingClientRect(), topo = r.top + scrollY, fim = r.bottom + scrollY;
+      const ini = sec.classList.contains('hero') ? 0 : sec.matches('footer') ? Math.min(topo, max) : topo - n;
+      out.push(ini);
+      if (fim - ini > innerHeight + 4) out.push(fim - innerHeight);
+    });
+    out.push(max);
+    return [...new Set(out.map(v => Math.round(Math.max(0, Math.min(v, max)))))].sort((a, b) => a - b);
+  };
+
+  function ir(dir) {
+    const ps = pontos(), y = scrollY;
+    const alvo = dir > 0 ? ps.find(v => v > y + 4) : [...ps].reverse().find(v => v < y - 4);
+    if (alvo === undefined) return;
+    travado = true;
+    scrollTo({ top: alvo, behavior: 'smooth' });
+    setTimeout(() => { travado = false; acum = 0; }, 950);
+  }
+
+  const livre = e => !mq.matches || e.ctrlKey || document.querySelector('dialog[open]') ||
+    (e.target.closest && e.target.closest('textarea, select, [data-scroll]'));
+
+  addEventListener('wheel', e => {
+    if (livre(e) || Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+    e.preventDefault();
+    if (travado) return;
+    acum += e.deltaY;
+    clearTimeout(tAcum); tAcum = setTimeout(() => acum = 0, 160);
+    if (Math.abs(acum) >= 40) { const d = acum > 0 ? 1 : -1; acum = 0; ir(d); }
+  }, { passive: false });
+
+  addEventListener('keydown', e => {
+    if (livre(e) || e.altKey || e.metaKey || e.shiftKey && e.key !== ' ') return;
+    if (e.target.closest && e.target.closest('input, textarea, select, button, a, summary, [role=tab]')) return;
+    const k = e.key;
+    if (k === 'PageDown' || k === 'ArrowDown' || k === ' ') { e.preventDefault(); if (!travado) ir(1); }
+    else if (k === 'PageUp' || k === 'ArrowUp') { e.preventDefault(); if (!travado) ir(-1); }
+    else if (k === 'Home') { e.preventDefault(); scrollTo({ top: 0, behavior: 'smooth' }); }
+    else if (k === 'End') { e.preventDefault(); scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' }); }
+  });
+})();
+</script>
 </body>
 </html>
