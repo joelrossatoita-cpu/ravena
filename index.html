@@ -1144,7 +1144,9 @@
     (async () => {
       if (anexo) dados.anexo = await lerBase64(anexo);
       if (ENDPOINT) {
-        fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', keepalive: true, body: JSON.stringify(dados) }).catch(() => {});
+        // keepalive só aceita corpo de até 64 KB; com anexo (PDF/foto) o envio seria descartado.
+        const corpo = JSON.stringify(dados);
+        fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', keepalive: corpo.length < 60000, body: corpo }).catch(() => {});
       }
     })();
 
