@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Página não encontrada · Ravena Solar</title>
+<meta http-equiv="refresh" content="6;url=/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root { --azul:#123A55; --sol:#F2A03D; --laranja:#E8721C; --ink-soft:#2C4A61; --font:"Figtree","Helvetica Neue",Helvetica,Arial,sans-serif; }
+  *,*::before,*::after { box-sizing:border-box; }
+  body { margin:0; min-height:100vh; min-height:100dvh; display:flex; flex-direction:column; background:#fff; color:var(--azul); font-family:var(--font); line-height:1.5; -webkit-font-smoothing:antialiased; }
+  header { padding:28px clamp(20px,3.4vw,56px); }
+  header img { display:block; width:clamp(132px,12vw,172px); height:auto; }
+  main { flex:1; display:flex; flex-direction:column; justify-content:center; padding:0 clamp(20px,3.4vw,56px) 80px; max-width:900px; }
+  .code { margin:0; font-weight:800; font-size:clamp(5rem,2rem + 14vw,11rem); line-height:1; color:var(--sol); letter-spacing:-.02em; }
+  h1 { margin:12px 0 0; font-weight:800; font-size:clamp(1.785rem,.945rem + 2.1vw,3.36rem); line-height:1.1; }
+  p { margin:20px 0 0; font-size:1.1875rem; color:var(--ink-soft); max-width:34em; }
+  .btn { display:inline-flex; align-items:center; gap:12px; margin-top:36px; align-self:flex-start; min-height:60px; padding:0 30px; background:var(--sol); color:var(--azul); font:800 1.1875rem/1 var(--font); text-decoration:none; transition:background-color .25s, transform .25s; }
+  .btn:hover { background:#F5B25E; }
+  .btn:active { transform:translateY(2px); }
+  .btn svg { width:20px; height:20px; }
+  .note { font-size:1rem; margin-top:18px; }
+  :focus-visible { outline:3px solid var(--laranja); outline-offset:3px; }
+</style>
+</head>
+<body>
+<header><a href="/"><img src="/logos/logo.svg" alt="Ravena Solar"></a></header>
+<main>
+  <div class="code" aria-hidden="true">404</div>
+  <h1>Essa página não existe</h1>
+  <p>O endereço que você acessou não faz parte do site da Ravena. Vamos levar você de volta ao início.</p>
+  <a class="btn" href="/">Ir para o início
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="square" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+  </a>
+  <p class="note">Redirecionando em <span id="s">6</span> segundos…</p>
+</main>
+<script>
+  var n = 6, el = document.getElementById('s');
+  setInterval(function () {
+    n--; if (n <= 0) { location.replace('/'); return; }
+    el.textContent = n;
+  }, 1000);
+</script>
+</body>
+</html>
