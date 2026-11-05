@@ -1,0 +1,1244 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ravena Solar · Energia solar para sua casa em Sorocaba e região</title>
+<meta name="description" content="Instalamos energia solar na sua casa com equipe própria. Na média dos nossos clientes, a conta de luz cai de 75% a 90%. Projeto, homologação na CPFL e instalação em Sorocaba, Votorantim, Itu e Salto.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/telhado-2400.webp" imagesrcset="img/telhado-1200.webp 1200w, img/telhado-2400.webp 2400w" imagesizes="(max-width: 820px) 100vw, 70vw">
+<style>
+  /* Cores lidas de logos/logo.svg */
+  :root {
+    --azul: #123A55;
+    --sol: #F2A03D;
+    --laranja: #E8721C;
+    --branco: #FFFFFF;
+    --ceu: #EEF2F7;          /* passo de tom do azul, para superfícies */
+
+    --ground: var(--branco);
+    --ink: var(--azul);
+    --ink-soft: #2C4A61;
+    --accent: var(--sol);
+
+    --font: "Figtree", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --margin: clamp(20px, 3.4vw, 56px);
+    --navh: 76px;            /* altura da barra fixa */
+
+    --phi: 1.615;            /* base do subtítulo: tamanho original do título / phi */
+    --t-hero: clamp(1.785rem, 0.945rem + 2.1vw, 3.36rem);   /* +5% sobre clamp(1.7rem, 0.9rem + 2vw, 3.2rem) */
+    --t-figure: clamp(1.75rem, 1.2rem + 1.3vw, 2.4rem);
+    --t-lead: calc(clamp(1.7rem, 0.9rem + 2vw, 3.2rem) / var(--phi));
+    --t-body: 1rem;
+
+    --ease: cubic-bezier(.2, .7, .2, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--font);
+    font-size: var(--t-body);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--laranja); outline-offset: 3px; }
+  ::selection { background: var(--sol); color: var(--azul); }
+
+  /* ---------- Barra ---------- */
+  /* Barra fixa: logo, índice da página e o CTA, sempre à vista. Plana, em passo de tom do azul. */
+  html { scroll-padding-top: calc(var(--navh) + 8px); }
+  .nav {
+    position: fixed; inset: 0 0 auto 0; z-index: 5;
+    height: var(--navh);
+    display: flex; align-items: center; gap: clamp(12px, 2.4vw, 40px);
+    padding: 0 var(--margin);
+    background: var(--ceu);
+  }
+  .nav__logo { flex: none; display: block; width: clamp(132px, 12vw, 172px); }
+  .nav__logo svg { display: block; width: 100%; height: auto; }
+  .nav > nav { margin-right: auto; }
+  .nav__links {
+    list-style: none; margin: 0; padding: 0;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .nav__links a {
+    display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px;
+    font-weight: 700; font-size: 1rem; line-height: 1.2; text-decoration: none; color: var(--ink-soft); white-space: nowrap;
+    transition: background-color .25s var(--ease), color .25s var(--ease);
+  }
+  @media (min-width: 821px) and (max-width: 1100px) {
+    .nav__links a { padding: 0 11px; }
+    .nav .nav__cta .longo { display: none; }
+    .nav .nav__cta .curto { display: inline; }
+  }
+  .nav__links a:hover { background: #DDE5EE; color: var(--azul); }
+  .nav__links a[aria-current="true"] { background: var(--azul); color: var(--branco); }
+  .nav .nav__cta { flex: none; min-height: 48px; padding: 0 22px; gap: 10px; font-size: 1.0625rem; }
+  .nav__cta .curto { display: none; }
+  .nav__menu {
+    display: none; flex: none; width: 48px; height: 48px; place-items: center;
+    background: #DDE5EE; color: var(--azul); border: 0; border-radius: 0; cursor: pointer;
+    transition: background-color .2s;
+  }
+  .nav__menu:hover { background: #CFD9E5; }
+  .nav__menu svg { width: 22px; height: 22px; }
+  .nav__menu .x { display: none; }
+  .nav.open .nav__menu .bars { display: none; }
+  .nav.open .nav__menu .x { display: block; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 24px;
+    align-items: center;
+    padding: 120px var(--margin) 56px;
+    overflow: hidden;
+  }
+
+  .hero__media {
+    position: absolute; top: 0; right: 0; bottom: 0;
+    width: 72%;
+    margin: 0;
+    /* O fade pedido: a foto some no branco antes de chegar ao texto. taste-skill-ignore */
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 20%, #000 60%); /* taste-skill-ignore */
+            mask-image: linear-gradient(to right, transparent 0%, transparent 20%, #000 60%); /* taste-skill-ignore */
+  }
+  .hero__media img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: 70% 78%;
+    filter: hue-rotate(-10deg) saturate(.92);
+    animation: settle 2.6s var(--ease) both;
+  }
+
+  .hero__text {
+    position: relative; z-index: 2;
+    grid-column: 1 / span 8;
+    max-width: 880px;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: var(--t-hero);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -0.035em;
+  }
+  h1 { text-wrap: balance; }
+  .lead {
+    margin: 36px 0 0;
+    font-size: max(1rem, calc(var(--t-lead) * .85));   /* -15%, nunca abaixo de 16px */
+    line-height: 1.5;
+    max-width: 34em;
+  }
+  .lead strong { font-weight: 700; }
+
+  /* Prova social */
+  .proof {
+    list-style: none; margin: 40px 0 0; padding: 0;
+    display: flex; flex-wrap: wrap; gap: 20px 40px;
+  }
+  .proof li { display: flex; flex-direction: column; gap: 4px; }
+  .proof__num {
+    display: flex; align-items: center; gap: 10px;
+    font-size: var(--t-figure); font-weight: 800; letter-spacing: -0.02em; line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .proof__label { font-size: 1rem; color: var(--ink-soft); }
+  .proof a { text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  .proof a:hover { color: var(--azul); text-decoration-thickness: 2px; }
+  .stars { display: flex; gap: 2px; }
+  .stars svg { width: 20px; height: 20px; }
+
+  /* Chamada */
+  .cta { margin-top: 44px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 12px;
+    min-height: 60px; padding: 0 30px;
+    background: var(--accent); color: var(--azul);
+    font: 800 1.1875rem/1 var(--font);
+    text-decoration: none; border: 0; border-radius: 0; cursor: pointer;
+    transition: transform .25s var(--ease), background-color .25s var(--ease);
+  }
+  .btn svg { width: 20px; height: 20px; transition: transform .25s var(--ease); }
+  .btn:hover { background: #F5B25E; }
+  .btn:hover svg { transform: translateX(4px); }
+  .btn:active { transform: translateY(2px); }
+  .cta__notes { margin: 0; font-size: 1rem; line-height: 1.45; }
+  .cta__notes span { display: block; color: var(--ink-soft); }
+  .cta__notes strong { font-weight: 700; }
+
+  /* ---------- Entrada ---------- */
+  .rise { animation: rise .9s var(--ease) both; }
+  .d1 { animation-delay: .05s; } .d2 { animation-delay: .14s; } .d3 { animation-delay: .23s; }
+  .d4 { animation-delay: .32s; } .d5 { animation-delay: .41s; } .d6 { animation-delay: .5s; }
+  @keyframes rise { from { opacity: 0; transform: translateY(24px); } }
+  @keyframes settle { from { transform: scale(1.07); } }
+
+  /* ---------- Formulário de simulação ---------- */
+  dialog {
+    width: min(560px, calc(100vw - 32px));
+    max-height: calc(100svh - 32px);
+    border: 0; padding: 0;
+    background: var(--branco); color: var(--azul);
+    box-shadow: 0 24px 60px rgba(18, 58, 85, .28); /* taste-skill-ignore: diálogo flutua de verdade */
+  }
+  dialog::backdrop { background: rgba(18, 58, 85, .55); }
+  dialog:target { display: block; position: fixed; inset: 0; margin: auto; z-index: 10; }
+  .sheet { padding: 32px 32px 28px; }
+  .sheet__head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+  .sheet h2 { margin: 0; font-size: 1.75rem; font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; }
+  .sheet__intro { margin: 10px 0 24px; }
+  .close {
+    flex: none; width: 44px; height: 44px; display: grid; place-items: center;
+    background: var(--ceu); color: var(--azul); border: 0; cursor: pointer; text-decoration: none;
+    transition: background-color .2s;
+  }
+  .close:hover { background: #DDE5EE; }
+  .close svg { width: 18px; height: 18px; }
+  .field { display: grid; gap: 6px; margin-bottom: 16px; }
+  .field label { font-weight: 700; }
+  .field small { color: var(--ink-soft); font-size: 1rem; }
+  .field input, .field select {
+    font: 500 1.0625rem var(--font); color: var(--azul);
+    min-height: 50px; padding: 0 14px;
+    background: var(--branco); border: 2px solid #C9D4DF; border-radius: 0;
+  }
+  .field input[type=file] { padding: 12px 14px; }
+  .field input:focus, .field select:focus { border-color: var(--azul); outline: none; }
+  .money { position: relative; }
+  .money span { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-weight: 700; }
+  .money input { width: 100%; padding-left: 48px; }
+  .warn {
+    margin: 4px 0 0; padding: 12px 14px; background: #FDF0DD; font-size: 1rem;
+  }
+  .sheet .btn { width: 100%; justify-content: center; margin-top: 8px; }
+  .sheet__foot { margin: 14px 0 0; text-align: center; font-size: 1rem; }
+  .done { text-align: left; }
+  .done p { font-size: var(--t-lead); }
+  .confirm .sheet__actions { display: grid; gap: 12px; margin-top: 24px; }
+  .btn--quiet { background: var(--ceu); }
+  .btn--quiet:hover { background: #DDE5EE; }
+
+  /* ---------- Telas menores ---------- */
+  @media (max-width: 1100px) {
+    .hero__text { grid-column: 1 / span 8; }
+  }
+
+  @media (max-width: 820px) {
+    :root { --navh: 68px; }
+    /* Celular: o índice vira um painel que abre sob a barra; o CTA continua na barra */
+    .nav__menu { display: grid; }
+    .js .nav__menu { display: grid; }
+    .nav__menu[hidden] { display: none; }
+    .nav { gap: 10px; }
+    .nav__logo { margin-right: auto; }
+    .nav__links {
+      display: none; position: absolute; top: 100%; left: 0; right: 0; margin: 0;
+      flex-direction: column; align-items: stretch; gap: 4px;
+      padding: 8px var(--margin) 20px; background: var(--ceu);
+    }
+    .nav.open .nav__links { display: flex; }
+    .nav__links a { min-height: 56px; padding: 0 16px; font-size: 1.125rem; }
+    .nav .nav__cta { width: auto; min-height: 48px; padding: 0 18px; }
+    .nav__cta .longo { display: none; }
+    .nav__cta .curto { display: inline; }
+    .hero {
+      display: flex; flex-direction: column; align-items: stretch;
+      min-height: 0; padding: var(--navh) var(--margin) 48px;
+    }
+    .hero__media {
+      position: relative; width: auto; height: 34svh; min-height: 240px;
+      margin: 0 calc(var(--margin) * -1);
+      -webkit-mask-image: linear-gradient(to bottom, #000 50%, transparent 100%); /* taste-skill-ignore */
+              mask-image: linear-gradient(to bottom, #000 50%, transparent 100%); /* taste-skill-ignore */
+    }
+    .hero__media img { object-position: 72% 80%; }
+    .hero__text { margin-top: -20px; max-width: none; }
+    .lead { margin-top: 20px; }
+    .proof { gap: 20px 32px; margin-top: 32px; }
+    .cta { margin-top: 28px; }
+    .btn { width: 100%; justify-content: center; }
+  }
+
+  @media (max-width: 420px) {
+    .nav__logo { width: 118px; }
+    .nav .nav__cta { padding: 0 14px; font-size: 1rem; }
+    .proof { flex-direction: column; }
+    .sheet { padding: 24px 20px 20px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rise, .hero__media img { animation: none; }
+    .btn, .btn svg { transition: none; }
+  }
+/* P2:CSS:START */
+  /* ---------- Página 2: prova social, o caso de Sorocaba ---------- */
+  .p2 { padding: clamp(48px, 6vw, 96px) var(--margin); background: var(--branco); }
+  .panel { background: var(--ceu); padding: clamp(28px, 3.6vw, 56px); }
+
+  .case {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+    column-gap: clamp(32px, 5vw, 88px); row-gap: 32px; align-items: center;
+  }
+  .p2 h2 {
+    margin: 0; font-size: clamp(1.75rem, 1rem + 2vw, 2.9rem); font-weight: 800;
+    line-height: 1.16; letter-spacing: -0.035em; max-width: 14em; text-wrap: balance;
+  }
+  /* Marca-texto que sangra para os lados sem deslocar o texto do alinhamento do parágrafo */
+  .p2 h2 span {
+    -webkit-box-decoration-break: clone; box-decoration-break: clone;
+    background: #FBDDB0; box-shadow: .18em 0 0 #FBDDB0, -.18em 0 0 #FBDDB0; /* taste-skill-ignore: extensão do marca-texto, não sombra */
+  }
+  .p2 p { margin: 18px 0 0; font-size: 1.0625rem; line-height: 1.5; max-width: 34em; }
+  .p2 p strong { font-weight: 700; }
+  .nb { white-space: nowrap; }
+  .cta__notes .nb { display: inline; color: inherit; }
+
+  /* Antes e depois: barras na proporção real (118 / 780 = 15,13%) */
+  .drop { margin: 0; display: grid; gap: 14px; }
+  .drop__row { display: grid; grid-template-columns: 8rem minmax(0, 1fr); align-items: center; gap: 18px; }
+  .p2 .drop__k { margin: 0; display: grid; gap: 2px; font-size: 1rem; }
+  .drop__k b { font-size: clamp(1.5rem, 1rem + 1vw, 2.1rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums; }
+  .drop__row--depois .drop__k b { color: #A84C0C; }
+  .drop__track { display: flex; height: clamp(56px, 5vw, 76px); }
+  .drop__bar { flex: none; width: 100%; height: 100%; background: var(--azul); }
+  .drop__row--depois .drop__bar { width: 15.13%; background: var(--sol); box-shadow: inset 0 0 0 2px #A84C0C; } /* taste-skill-ignore: contorno da barra para 3:1 */
+  .drop__gap {
+    flex: 1; min-width: 0; display: grid; place-items: center; padding: 0 12px; text-align: center;
+    border: 2px dashed #6B849B; border-left: 0;
+    font-weight: 700; font-size: 1rem; line-height: 1.2; color: var(--azul);
+  }
+  .drop figcaption { margin-top: 6px; padding-left: calc(8rem + 18px); font-size: 1rem; color: var(--ink-soft); }
+  /* O momento da seção: a barra de "depois" encolhe de 780 até 118 quando o gráfico entra na tela.
+     Só o gráfico anima; o texto está sempre visível. */
+  .js .drop:not(.in) .drop__row--depois .drop__bar { width: 100%; }
+  .js .drop:not(.in) .drop__gap { opacity: 0; }
+  .js .drop .drop__row--depois .drop__bar { transition: width .9s cubic-bezier(.16, 1, .3, 1) .15s; }
+  .js .drop .drop__gap { transition: opacity .35s var(--ease) .8s; }
+
+  /* Fecho: o caso vira a pergunta do visitante */
+  .next {
+    margin-top: clamp(40px, 4.4vw, 64px); padding-top: clamp(28px, 3vw, 40px);
+    border-top: 1px solid #C9D4DF;
+    display: flex; flex-wrap: wrap; align-items: center; gap: 20px clamp(28px, 4vw, 56px);
+  }
+  .p2 .next__q { margin: 0; font-size: clamp(1.375rem, 1rem + 1vw, 1.875rem); font-weight: 800; line-height: 1.2; letter-spacing: -0.025em; }
+  .next .cta { margin-top: 0; }
+  .p2 .cta__notes { margin: 0; font-size: 1rem; }
+
+  @media (max-width: 900px) {
+    .case { grid-template-columns: 1fr; }
+    .p2 h2, .p2 p { max-width: none; }
+  }
+  @media (max-width: 480px) {
+    .drop__row { grid-template-columns: 1fr; gap: 8px; }
+    .p2 .drop__k { grid-auto-flow: column; justify-content: start; align-items: baseline; gap: 10px; }
+    .drop figcaption { padding-left: 0; }
+    .next .btn { padding: 0 18px; font-size: 1.0625rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .js .drop .drop__row--depois .drop__bar, .js .drop .drop__gap { transition: none; }
+    .js .drop:not(.in) .drop__row--depois .drop__bar { width: 15.13%; }
+    .js .drop:not(.in) .drop__gap { opacity: 1; }
+  }
+  @media print {
+    .js .drop:not(.in) .drop__row--depois .drop__bar { width: 15.13%; }
+    .js .drop:not(.in) .drop__gap { opacity: 1; }
+  }
+/* P2:CSS:END */
+/* P3:CSS:START */
+  /* ---------- Página 3: como funciona, três fases num palco só ---------- */
+  .p3 { --gap: clamp(24px, 2.4vw, 40px); --dx: 40px; overflow-x: clip; padding: 0 var(--margin) clamp(72px, 8vw, 128px); }  /* o espaço acima do título é o padding de baixo da .p2, igual ao do hero até a prova social */
+  .p3 h2 {
+    margin: 0; font-size: clamp(1.75rem, 1rem + 2vw, 2.9rem); font-weight: 800;
+    line-height: 1.1; letter-spacing: -0.035em; text-wrap: balance;
+  }
+
+  .palco {
+    margin-top: clamp(32px, 3.6vw, 56px);
+    display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); row-gap: 28px;
+  }
+
+  /* A foto da fase: à direita, como no hero */
+  /* Moldura fixa: 4:3 no computador e no tablet, 1:1 no celular. As fotos são feitas nessa proporção (IMAGENS.md). */
+  .palco__fotos { grid-column: 8 / span 5; grid-row: 1; align-self: stretch; display: grid; background: var(--ceu); overflow: hidden; touch-action: pan-y; }
+  /* Altura mínima de 4:3 pela largura; se o texto for mais alto, a foto cresce junto e o recorte é central. */
+  .palco__fotos::before { content: ""; grid-area: 1 / 1; padding-top: 75%; }
+  .foto { margin: 0; position: relative; grid-area: 1 / 1; background: var(--ceu); }
+  .foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: hue-rotate(-10deg) saturate(.92); }
+  .foto picture { position: absolute; inset: 0; display: block; }
+
+  /* O texto da fase */
+  .palco__txt { grid-column: 1 / span 6; grid-row: 1; padding-right: clamp(0px, 1.6vw, 24px); display: flex; flex-direction: column; gap: 32px; }
+  .fases { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; }
+  .fases[hidden] { display: none; }
+  .fases button {
+    min-height: 56px; padding: 8px 12px; border: 0; border-radius: 0; cursor: pointer; text-align: left;
+    font: 700 1rem/1.2 var(--font); color: var(--ink-soft); background: var(--ceu);
+    transition: background-color .35s var(--ease), color .35s var(--ease);
+  }
+  .fases button:hover { background: #DDE5EE; color: var(--azul); }
+  .fases button[aria-selected="true"] { background: var(--azul); color: var(--branco); }
+
+  .paineis { display: grid; }
+  .fase { display: flex; flex-direction: column; gap: 24px; }
+  .fase + .fase { margin-top: 56px; }
+  .fase h3 { margin: 0; font-size: clamp(1.5rem, 1rem + 1.3vw, 2.25rem); font-weight: 800; line-height: 1.12; letter-spacing: -0.03em; text-wrap: balance; }
+  .lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
+  .lista li { font-size: 1.0625rem; line-height: 1.5; }
+  .lista b { font-weight: 800; }
+
+  .palco__ctl { margin-top: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+  .seta {
+    flex: none; width: 60px; height: 60px; display: grid; place-items: center;
+    background: var(--ceu); color: var(--azul); border: 0; border-radius: 0; cursor: pointer;
+    transition: background-color .25s var(--ease), transform .25s var(--ease), opacity .25s var(--ease);
+  }
+  .seta:hover { background: #DDE5EE; }
+  .seta:active { transform: translateY(2px); }
+  .seta:disabled { opacity: .35; cursor: default; }
+  .seta svg { width: 20px; height: 20px; }
+  .seta[hidden] { display: none; }
+  .palco__ctl .seta--prev { margin-left: auto; }  /* CTA à esquerda, setas à direita */
+
+  /* Faixa de prazo e garantia: embaixo do palco, no mesmo desenho da prova do hero */
+  .garantias {
+    list-style: none; margin: clamp(32px, 3.2vw, 48px) 0 0; padding: clamp(24px, 2.4vw, 32px) 0 0;
+    border-top: 1px solid #C9D5E1;
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: var(--gap); row-gap: 20px;
+  }
+  .garantias li { display: flex; flex-direction: column; gap: 6px; }
+  .garantias__num { font-size: var(--t-figure); font-weight: 800; letter-spacing: -0.02em; line-height: 1; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .garantias__label { font-size: 1rem; line-height: 1.4; color: var(--ink-soft); max-width: 22em; }
+  /* Computador: a faixa usa a grade do palco; o terceiro item começa na borda da foto */
+  @media (min-width: 1101px) {
+    .garantias { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+    .garantias li:nth-child(1) { grid-column: 1 / span 3; }
+    .garantias li:nth-child(2) { grid-column: 4 / span 4; }
+    .garantias li:nth-child(3) { grid-column: 8 / span 5; }
+  }
+  @media (min-width: 1101px) and (max-width: 1360px) {
+    .garantias li:nth-child(2) { grid-column: 4 / span 3; }
+    .garantias li:nth-child(3) { grid-column: 7 / span 6; }
+  }
+
+  /* Com JS: as fases se empilham no mesmo lugar e trocam com transição */
+  .js .foto, .js .fase { grid-area: 1 / 1; margin-top: 0; }
+  .js .foto:not(.on), .js .fase:not(.on) { opacity: 0; visibility: hidden; }
+  .js .foto { transition: opacity .35s var(--ease), visibility 0s linear .35s; }
+  .js .fase { transition: opacity .14s linear, visibility 0s linear .14s; }   /* o texto que sai some antes do novo entrar: os dois títulos nunca se sobrepõem */
+  .js .foto.on, .js .fase.on { transition: opacity .35s var(--ease); }
+  .js .fase.on { transition-delay: .12s; }
+  .js .foto.on > * { animation: foto-in .9s var(--ease) both; }
+  .js .fase.on > :not(.lista) { animation: txt-in .6s var(--ease) .12s both; }
+  .js .fase.on .lista li { animation: txt-in .6s var(--ease) both; }
+  .js .fase.on .lista li:nth-child(1) { animation-delay: .2s; }
+  .js .fase.on .lista li:nth-child(2) { animation-delay: .28s; }
+  .js .fase.on .lista li:nth-child(3) { animation-delay: .36s; }
+  /* A primeira fase já chega pronta: a animação é só para a troca */
+  .js .p3.init .foto, .js .p3.init .fase { transition: none; }
+  .js .p3.init .foto.on > *, .js .p3.init .fase.on > *, .js .p3.init .fase.on .lista li { animation: none; }
+  @keyframes foto-in { from { opacity: 0; transform: translateX(var(--dx)) scale(1.04); } }
+  @keyframes txt-in { from { opacity: 0; transform: translateX(calc(var(--dx) * .5)); } }
+
+  /* Notebook: o texto fica mais alto, então a foto ganha uma coluna para não virar retrato */
+  @media (max-width: 1360px) { .palco__fotos { grid-column: 7 / span 6; } }
+  /* Coluna estreita: a foto fica 4:3 no alto, em vez de esticar com o texto e virar retrato */
+  @media (max-width: 1100px) { .palco__txt { padding-right: 0; } .palco__fotos { align-self: start; } }
+  /* Coluna de texto estreita: o botão ocupa a linha e as setas descem juntas, à direita */
+  @media (min-width: 821px) and (max-width: 1000px) { .palco__ctl .btn { flex: 1 1 100%; justify-content: center; } }
+  @media (max-width: 820px) {
+    .palco { grid-template-columns: minmax(0, 1fr); }
+    .palco__fotos, .palco__txt { grid-column: 1 / -1; grid-row: auto; }
+    .palco__txt { gap: 24px; }
+    .garantias { grid-template-columns: minmax(0, 1fr); }
+    .garantias li { flex-direction: row; align-items: baseline; gap: 12px; }
+    .garantias__num { flex: none; min-width: 5.6em; font-size: 1.375rem; }
+  }
+  @media (max-width: 480px) {
+    .fases button { min-height: 64px; padding: 8px 10px; font-size: .9375rem; }
+    .palco__ctl .btn { flex: 1 1 100%; justify-content: center; }
+    .palco__fotos::before { padding-top: 100%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .js .foto, .js .fase, .js .foto.on, .js .fase.on { transition: none; transition-delay: 0s; }
+    .js .foto.on > *, .js .fase.on > :not(.lista), .js .fase.on .lista li { animation: none; }
+    .fases button, .seta { transition: none; }
+  }
+  @media print {
+    .js .foto:not(.on), .js .fase:not(.on) { opacity: 1; visibility: visible; }
+    .js .foto, .js .fase { grid-area: auto; }
+    .fases, .seta { display: none; }
+  }
+/* P3:CSS:END */
+/* P4:CSS:START */
+  /* ---------- Página 4: perguntas frequentes (acordeão, como a Lemon) ---------- */
+  .p4 { padding: 0 var(--margin) clamp(72px, 8vw, 128px); }
+  .faq { max-width: 860px; margin: 0 auto; display: grid; gap: 40px; }
+  .faq__head { text-align: center; }
+  .faq__head p { margin-left: auto; margin-right: auto; }
+  .p4 h2 {
+    margin: 0; font-size: clamp(1.75rem, 1rem + 2vw, 2.9rem); font-weight: 800;
+    line-height: 1.1; letter-spacing: -0.035em; text-wrap: balance; margin-inline: auto; max-width: 14em;
+  }
+  .faq__head p { margin: 20px auto 0; font-size: 1.0625rem; line-height: 1.5; max-width: 32em; }
+  .qa { display: grid; gap: 8px; }
+  .qa details { background: var(--ceu); transition: background-color .25s var(--ease); }
+  .qa details:hover { background: #E3EAF2; }
+  .qa summary {
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    min-height: 68px; padding: 16px 24px; cursor: pointer; list-style: none;
+    font-size: clamp(1.0625rem, .95rem + .4vw, 1.25rem); font-weight: 700; line-height: 1.25; letter-spacing: -0.01em;
+  }
+  .qa summary::-webkit-details-marker { display: none; }
+  .qa summary svg { flex: none; width: 20px; height: 20px; transition: transform .3s var(--ease); }
+  .qa details[open] summary svg { transform: rotate(180deg); }
+  .qa details[open] { background: var(--ceu); }
+  .qa .resp { padding: 0 24px 26px; max-width: 40em; animation: txt-in .5s var(--ease) both; --dx: 0px; }
+  .qa .resp p { margin: 0; font-size: 1.0625rem; line-height: 1.55; }
+  .qa .resp p + p { margin-top: 12px; }
+  .qa .resp b { font-weight: 800; }
+  @media (prefers-reduced-motion: reduce) {
+    .qa .resp { animation: none; }
+    .qa details, .qa summary svg { transition: none; }
+  }
+  @media print { .qa details:not([open]) > .resp { display: block; } }
+/* P4:CSS:END */
+/* FOOT:CSS:START */
+  /* ---------- Rodapé: os painéis são o fim da página ---------- */
+  .foot {
+    position: relative; isolation: isolate; overflow: hidden;
+    color: var(--branco); background: var(--branco);
+    padding: clamp(120px, 13vw, 200px) var(--margin) 0;
+    display: flex; flex-direction: column; gap: clamp(56px, 7vw, 112px);
+  }
+  /* A página branca vira céu antes de chegar ao texto. taste-skill-ignore */
+  .foot__bg { position: absolute; inset: 0; z-index: -2; margin: 0; display: block;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 26%); /* taste-skill-ignore */
+            mask-image: linear-gradient(to bottom, transparent 0%, #000 26%); /* taste-skill-ignore */
+  }
+  .foot__bg picture { display: block; width: 100%; height: 100%; }
+  .foot__bg img {
+    width: 100%; height: 100%; object-fit: cover; object-position: 50% 100%;
+    filter: hue-rotate(-10deg) saturate(.92);
+    transition: transform 2.6s var(--ease);
+  }
+  /* Faixa neutra sob o texto dos dados, sobre os painéis. taste-skill-ignore */
+  .foot__scrim { position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 52%, rgba(0,0,0,.55) 78%, rgba(0,0,0,.72) 100%); /* taste-skill-ignore */
+  }
+  .foot h2 {
+    margin: 0; font-size: clamp(1.9rem, 1rem + 3vw, 4rem); font-weight: 800;
+    line-height: 1.06; letter-spacing: -0.035em; text-wrap: balance; max-width: 14em;
+  }
+  .foot__cta .cta { margin-top: 36px; }
+  .foot .cta__notes span { color: var(--branco); }
+  .foot__base {
+    display: grid; grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: clamp(24px, 2.4vw, 40px); row-gap: 40px; align-items: start;
+  }
+  .foot__id { grid-column: 1 / span 5; }
+  .foot__logo { display: block; width: clamp(170px, 15vw, 220px); }
+  .foot__logo svg { display: block; width: 100%; height: auto; }
+  .foot__id p { margin: 20px 0 0; font-size: 1.0625rem; line-height: 1.5; max-width: 24em; }
+  .foot__contact { grid-column: 6 / span 4; font-style: normal; display: grid; gap: 4px; align-content: start; }
+  .foot__nav { grid-column: 10 / span 3; display: grid; gap: 4px; align-content: start; }
+  .foot__h { margin: 0 0 8px; font-size: 1.0625rem; font-weight: 800; }
+  .foot a { text-underline-offset: 4px; text-decoration-thickness: 1px; }
+  .foot__contact a, .foot__nav a {
+    display: inline-flex; align-items: center; min-height: 40px; font-size: 1.0625rem; font-weight: 500; width: fit-content;
+    text-decoration: none; transition: color .2s;
+  }
+  .foot__contact a:hover, .foot__nav a:hover { color: var(--sol); text-decoration: underline; }
+  .foot__contact span { font-size: 1.0625rem; min-height: 40px; display: inline-flex; align-items: center; }
+  .foot :focus-visible { outline-color: var(--sol); }
+  .foot__legal {
+    margin: 0 calc(var(--margin) * -1); padding: 0 var(--margin) 32px; font-size: 1rem;
+  }
+  .foot__legal a { text-decoration: underline; }
+  /* Entrada: o texto se escreve enquanto o céu se firma. Sem JS, tudo já está visível. */
+  .js .foot .rv { transition: opacity .8s var(--ease), transform .8s var(--ease); transition-delay: calc(var(--i, 0) * 90ms); }
+  .js .foot:not(.in) .rv { opacity: 0; transform: translateY(24px); }
+  .js .foot:not(.in) .foot__bg img { transform: scale(1.07); }
+  @media (max-width: 900px) {
+    .foot__id, .foot__contact, .foot__nav { grid-column: 1 / -1; }
+    .foot__nav { grid-template-columns: 1fr 1fr; column-gap: 24px; }
+    .foot__nav .foot__h { grid-column: 1 / -1; }
+    .foot .btn { width: 100%; justify-content: center; }
+  }
+  @media (max-width: 820px) { .foot { padding-top: 120px; } }
+  @media (prefers-reduced-motion: reduce) {
+    .js .foot .rv, .foot__bg img { transition: none; }
+    .js .foot:not(.in) .rv { opacity: 1; transform: none; }
+    .js .foot:not(.in) .foot__bg img { transform: none; }
+  }
+/* FOOT:CSS:END */
+</style>
+</head>
+<body>
+
+<header class="nav" id="topo">
+  <a class="nav__logo" href="./" aria-label="Ravena Solar, página inicial">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="40 18 640 182" role="img" aria-hidden="true">
+      <circle cx="132" cy="96" r="46" fill="#F2A03D"/>
+      <g stroke="#F2A03D" stroke-width="9" stroke-linecap="round">
+        <line x1="132" y1="22" x2="132" y2="36"/><line x1="184" y1="44" x2="194" y2="34"/>
+        <line x1="80" y1="44" x2="70" y2="34"/><line x1="206" y1="96" x2="220" y2="96"/>
+        <line x1="58" y1="96" x2="44" y2="96"/>
+      </g>
+      <path d="M52 196 L104 118 L212 118 L264 196 Z" fill="#123A55"/>
+      <g stroke="#FFFFFF" stroke-width="4" opacity="0.85">
+        <line x1="88" y1="118" x2="70" y2="196"/><line x1="122" y1="118" x2="114" y2="196"/>
+        <line x1="158" y1="118" x2="158" y2="196"/><line x1="194" y1="118" x2="202" y2="196"/>
+        <line x1="92" y1="157" x2="238" y2="157"/>
+      </g>
+      <text x="316" y="118" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="82" font-weight="700" letter-spacing="2" fill="#123A55">RAVENA</text>
+      <text x="320" y="182" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="46" font-weight="300" letter-spacing="16" fill="#E8721C">SOLAR</text>
+    </svg>
+  </a>
+  <nav aria-label="Seções da página">
+    <ul class="nav__links" id="nav-links">
+      <li><a href="#caso">O caso real</a></li>
+      <li><a href="#como-funciona">Como funciona</a></li>
+      <li><a href="#duvidas">Dúvidas</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+  </nav>
+  <a class="btn nav__cta" href="#simulacao" data-origem="barra">
+    <span class="longo">Simular minha economia</span><span class="curto">Simular</span>
+    <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h12M10.5 4.5L16 10l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg>
+  </a>
+  <button class="nav__menu" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Abrir índice da página" hidden>
+    <svg class="bars" viewBox="0 0 22 22" aria-hidden="true"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="2.4"/></svg>
+    <svg class="x" viewBox="0 0 22 22" aria-hidden="true"><path d="M4 4l14 14M18 4L4 18" stroke="currentColor" stroke-width="2.4"/></svg>
+  </button>
+</header>
+
+<main>
+<section class="hero">
+  <figure class="hero__media">
+    <picture>
+      <source type="image/webp" srcset="img/telhado-1200.webp 1200w, img/telhado-2400.webp 2400w" sizes="(max-width: 820px) 100vw, 72vw">
+      <img src="img/telhado-2400.jpg" srcset="img/telhado-1200.jpg 1200w, img/telhado-2400.jpg 2400w" sizes="(max-width: 820px) 100vw, 72vw"
+           width="2400" height="1600" alt="Telhado de telha de barro com quinze painéis solares instalados, sob céu azul." fetchpriority="high">
+    </picture>
+  </figure>
+
+  <div class="hero__text">
+    <h1 class="rise d2">Energia solar na sua casa.<br> Sua conta de luz reduz em até 90%.</h1>
+
+    <p class="lead rise d3">
+      Painéis solares no seu telhado, sem você se preocupar. A Ravena cuida desde a compra do seu painel até a instalação e garantia.
+    </p>
+
+    <div class="cta rise d4">
+      <a class="btn" href="#simulacao" data-origem="hero">
+        Simular minha economia
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h12M10.5 4.5L16 10l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg>
+      </a>
+      <p class="cta__notes">
+        <strong>Ideal para contas a partir de R$ 450/mês.</strong>
+        <span>Resposta pelo WhatsApp no mesmo dia útil.</span>
+      </p>
+    </div>
+
+    <ul class="proof rise d5" aria-label="Quem já confia na Ravena">
+      <li>
+        <span class="proof__num">4,8
+          <span class="stars" role="img" aria-label="Nota 4,8 de 5">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#E8721C" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 6L10 14.8 4.6 17.8l1.2-6L1.4 7.7l6-.7z"/></svg>
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#E8721C" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 6L10 14.8 4.6 17.8l1.2-6L1.4 7.7l6-.7z"/></svg>
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#E8721C" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 6L10 14.8 4.6 17.8l1.2-6L1.4 7.7l6-.7z"/></svg>
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path fill="#E8721C" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 6L10 14.8 4.6 17.8l1.2-6L1.4 7.7l6-.7z"/></svg>
+            <svg viewBox="0 0 20 20" aria-hidden="true"><defs><clipPath id="quase"><rect width="16" height="20"/></clipPath></defs><path fill="#E5D3C2" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 6L10 14.8 4.6 17.8l1.2-6L1.4 7.7l6-.7z"/><path fill="#E8721C" clip-path="url(#quase)" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 6L10 14.8 4.6 17.8l1.2-6L1.4 7.7l6-.7z"/></svg>
+          </span>
+        </span>
+        <a class="proof__label" href="https://www.google.com/maps/search/?api=1&amp;query=Ravena+Solar+Sorocaba" target="_blank" rel="noopener">137 avaliações no Google</a>
+      </li>
+      <li>
+        <span class="proof__num">412</span>
+        <span class="proof__label">casas com sistema instalado</span>
+      </li>
+      <li>
+        <span class="proof__num">6 anos</span>
+        <span class="proof__label">em Sorocaba, equipe própria</span>
+      </li>
+    </ul>
+
+  </div>
+</section>
+<!-- P2:START -->
+<section class="p2" id="caso" aria-labelledby="caso-t">
+  <div class="panel">
+    <div class="case">
+      <div>
+        <h2 id="caso-t"><span>Em Sorocaba, a conta de R$ 780 virou R$ 118.</span></h2>
+        <p>Uma das 412 casas que instalamos na região. Uma casa comum, como a sua, com a Energia Solar ligada em março de 2025. Em 1 ano, a média da conta de luz diminuiu em 85%, reduzindo para uma média de R$&nbsp;118 mensais.</p>
+        <p>E tudo isso instalado <strong>exclusivamente pela equipe da Ravena</strong>, sem preocupações para o cliente.</p>
+      </div>
+
+      <figure class="drop" aria-labelledby="drop-legenda">
+        <div class="drop__row">
+          <p class="drop__k"><span>Antes</span><b>R$ 780</b></p>
+          <div class="drop__track" aria-hidden="true"><span class="drop__bar"></span></div>
+        </div>
+        <div class="drop__row drop__row--depois">
+          <p class="drop__k"><span>Depois, na média</span><b>R$ 118</b></p>
+          <div class="drop__track" aria-hidden="true"><span class="drop__bar"></span><span class="drop__gap">R$ 662 a menos por mês</span></div>
+        </div>
+        <figcaption id="drop-legenda">Conta de luz por mês: R$ 662 a menos, na média de 12 meses. A conta não zera: sempre resta a taxa mínima e o custo do fio, que é o uso da rede da CPFL.</figcaption>
+      </figure>
+    </div>
+
+    <div class="next">
+      <p class="next__q">E a sua conta, quanto cairia?</p>
+      <div class="cta">
+        <a class="btn" href="#simulacao" data-origem="caso">
+          Simular minha economia
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h12M10.5 4.5L16 10l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg>
+        </a>
+        <p class="cta__notes">
+          <strong>Ideal para contas a partir de <span class="nb">R$ 450/mês</span>.</strong>
+          <span>Resposta pelo WhatsApp no mesmo dia útil.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- P2:END -->
+<!-- P3:START -->
+<section class="p3" id="como-funciona" aria-labelledby="como-t">
+  <h2 id="como-t">Do primeiro contato ao sistema ligado.</h2>
+
+  <div class="palco">
+    <div class="palco__fotos">
+      <figure class="foto" data-fase="0" data-foto="visita">
+        <picture>
+          <source type="image/webp" srcset="img/como-visita-800.webp 800w, img/como-visita-1448.webp 1448w" sizes="(max-width: 820px) 100vw, (max-width: 1360px) 50vw, 40vw">
+          <img src="img/como-visita-1448.jpg" srcset="img/como-visita-800.jpg 800w, img/como-visita-1448.jpg 1448w" sizes="(max-width: 820px) 100vw, (max-width: 1360px) 50vw, 40vw"
+               width="1448" height="1086" alt="O dono da casa, de costas no quintal, acompanha um técnico que mede com trena o telhado de telha de barro." loading="lazy" decoding="async">
+        </picture>
+      </figure>
+      <figure class="foto" data-fase="1" data-foto="instalacao">
+        <picture>
+          <source type="image/webp" srcset="img/como-instalacao-800.webp 800w, img/como-instalacao-1448.webp 1448w" sizes="(max-width: 820px) 100vw, (max-width: 1360px) 50vw, 40vw">
+          <img src="img/como-instalacao-1448.jpg" srcset="img/como-instalacao-800.jpg 800w, img/como-instalacao-1448.jpg 1448w" sizes="(max-width: 820px) 100vw, (max-width: 1360px) 50vw, 40vw"
+               width="1448" height="1086" alt="Mãe e filho olham do quintal dois instaladores fixando os painéis no telhado de telha de barro; o menino aponta para eles." loading="lazy" decoding="async">
+        </picture>
+      </figure>
+      <figure class="foto" data-fase="2" data-foto="inversor">
+        <picture>
+          <source type="image/webp" srcset="img/como-inversor-800.webp 800w, img/como-inversor-1448.webp 1448w" sizes="(max-width: 820px) 100vw, (max-width: 1360px) 50vw, 40vw">
+          <img src="img/como-inversor-1448.jpg" srcset="img/como-inversor-800.jpg 800w, img/como-inversor-1448.jpg 1448w" sizes="(max-width: 820px) 100vw, (max-width: 1360px) 50vw, 40vw"
+               width="1448" height="1086" alt="Um casal olha, na garagem, o inversor recém-instalado na parede, com o display aceso e os cabos organizados." loading="lazy" decoding="async">
+        </picture>
+      </figure>
+    </div>
+
+    <div class="palco__txt">
+      <div class="fases" role="tablist" aria-label="Fases" hidden>
+        <button type="button" role="tab" id="tab-antes" aria-controls="fase-antes">Antes de assinar</button>
+        <button type="button" role="tab" id="tab-obra" aria-controls="fase-obra">Projeto e obra</button>
+        <button type="button" role="tab" id="tab-ligado" aria-controls="fase-ligado">Sistema ligado</button>
+      </div>
+
+      <div class="paineis">
+        <div class="fase" id="fase-antes" role="tabpanel" aria-labelledby="tab-antes">
+          <h3 id="fase-antes-t">Antes de assinar, você não paga nada.</h3>
+          <ul class="lista">
+            <li><b>Simulação.</b> Você manda nome, WhatsApp, cidade e o valor da conta. A resposta chega no mesmo dia útil.</li>
+            <li><b>Visita técnica.</b> Um técnico nosso mede o seu telhado, sem custo e sem compromisso.</li>
+            <li><b>Proposta.</b> Três tamanhos de sistema para comparar. Na maioria das casas, de R$&nbsp;14 mil a R$&nbsp;19 mil.</li>
+          </ul>
+        </div>
+        <div class="fase" id="fase-obra" role="tabpanel" aria-labelledby="tab-obra">
+          <h3 id="fase-obra-t">A papelada e a obra ficam com a gente.</h3>
+          <ul class="lista">
+            <li><b>Assinatura.</b> À vista ou financiado por dois bancos parceiros. Entrada zero é possível.</li>
+            <li><b>Projeto.</b> Desenhamos o sistema e cuidamos da aprovação da CPFL, a parte mais longa do prazo.</li>
+            <li><b>Instalação.</b> Dois dias no seu telhado, com equipe própria. Infiltração causada pela obra tem garantia de 5 anos.</li>
+          </ul>
+        </div>
+        <div class="fase" id="fase-ligado" role="tabpanel" aria-labelledby="tab-ligado">
+          <h3 id="fase-ligado-t">Ligado, e a gente continua por perto.</h3>
+          <ul class="lista">
+            <li><b>Vistoria e ligação.</b> A CPFL confere a instalação e libera o sistema. Da assinatura até aqui: de 45 a 60 dias.</li>
+            <li><b>Funcionamento.</b> A conta cai de 75% a 90% na média dos nossos clientes. Não zera: sempre resta a taxa mínima e o custo do fio.</li>
+            <li><b>Acompanhamento.</b> No primeiro ano, acompanhamos a produção e ligamos se cair fora do previsto. Garantia de 25 anos no painel e 10 no inversor.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="palco__ctl">
+        <a class="btn" href="#simulacao" data-origem="como-funciona">
+          Simular minha economia
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h12M10.5 4.5L16 10l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg>
+        </a>
+        <button class="seta seta--prev" type="button" aria-label="Fase anterior" hidden>
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M17 10H5M9.5 4.5L4 10l5.5 5.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg>
+        </button>
+        <button class="seta seta--next" type="button" aria-label="Próxima fase" hidden>
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h12M10.5 4.5L16 10l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fora das abas: vale para o processo inteiro e fica sempre à vista -->
+  <ul class="garantias" aria-label="Prazo e garantia da obra">
+    <li><span class="garantias__num">45 a 60 dias</span><span class="garantias__label">da assinatura ao sistema ligado</span></li>
+    <li><span class="garantias__num">2 dias</span><span class="garantias__label">de obra no seu telhado</span></li>
+    <li><span class="garantias__num">5 anos</span><span class="garantias__label">de garantia da instalação, incluindo infiltração</span></li>
+  </ul>
+</section>
+<!-- P3:END -->
+<!-- P4:START -->
+<section class="p4" id="duvidas" aria-labelledby="faq-t">
+  <div class="faq">
+    <div class="faq__head">
+      <h2 id="faq-t">Dúvidas Frequentes</h2>
+    </div>
+
+    <div class="qa">
+      <details open>
+        <summary>Como sei que vocês não vão sumir daqui a dois anos?
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 7.5l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg>
+        </summary>
+        <div class="resp">
+          <p>Faz todo sentido perguntar: por aqui, já teve empresa que fechou e deixou obra pela metade. O que a gente pode te mostrar é o que já está de pé: <b>6 anos em Sorocaba, 11 pessoas e 412 casas instaladas</b>. A equipe que sobe no seu telhado é nossa, com carteira assinada, e não terceirizamos a instalação.</p>
+          <p>Somos assistência técnica autorizada da marca do inversor que instalamos. E a garantia vem por escrito: <b>25 anos</b> de desempenho do painel, <b>10 anos</b> do inversor e <b>5 anos</b> da nossa instalação.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Isso não vai estragar meu telhado?
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 7.5l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg>
+        </summary>
+        <div class="resp">
+          <p>É o segundo medo que mais ouvimos, principalmente de quem tem telha de barro. Antes de qualquer coisa, um técnico nosso vai até a sua casa e mede o telhado, <b>sem custo e sem compromisso</b>. Quem instala é a nossa equipe, e a obra leva dois dias.</p>
+          <p>Se a obra causar infiltração, a nossa garantia de <b>5 anos</b> da instalação cobre. Está no contrato, não depende de boa vontade.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Ouvi dizer que “taxaram o sol”. Ainda vale a pena?
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 7.5l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg>
+        </summary>
+        <div class="resp">
+          <p>Vale. Desde a Lei 14.300, existe uma cobrança sobre a energia que o seu sistema manda para a rede, e ela aumenta ano a ano. Ou seja, o cálculo mudou, e quase ninguém explica direito como.</p>
+          <p>O que vemos hoje: na média dos nossos clientes, a conta cai de <b>75% a 90%</b> e o investimento volta em <b>3 a 4 anos</b>. Na simulação, o nosso vendedor faz a conta com o valor da sua conta de luz, não com uma promessa genérica.</p>
+        </div>
+      </details>
+      <details>
+        <summary>E se eu mudar de casa?
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 7.5l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg>
+        </summary>
+        <div class="resp">
+          <p>O sistema valoriza o imóvel e pode ser transferido para o próximo dono. Mesmo assim, seja sincero com a conta: ela fecha melhor para quem não pretende vender tão cedo, porque o retorno leva de 3 a 4 anos.</p>
+        </div>
+      </details>
+      <details>
+        <summary>E em dia nublado? E à noite?
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 7.5l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg>
+        </summary>
+        <div class="resp">
+          <p>Em dia nublado o sistema produz menos, e à noite não produz. O que compensa é o <b>crédito acumulado ao longo do mês</b>: nas horas de sol, o excedente vai para a rede da CPFL, e você usa esse crédito quando precisa. A conta fecha no mês, não no dia.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Preciso de bateria?
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 7.5l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg>
+        </summary>
+        <div class="resp">
+          <p>Não. Em casa ligada na rede da CPFL, o crédito de energia faz o papel da bateria. Por isso o sistema fica mais simples e mais barato. A Ravena não vende bateria.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Minha conta de luz vai zerar?
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 7.5l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg>
+        </summary>
+        <div class="resp">
+          <p>Não, e desconfie de quem prometer isso. Sempre resta a taxa mínima e o custo do fio, que é o uso da rede da CPFL. O que a gente garante é a queda: de <b>75% a 90%</b> na média dos nossos clientes. Em Sorocaba, uma conta de R$&nbsp;780 virou, na média, R$&nbsp;118.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Quanto custa? Tem financiamento?
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 7.5l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg>
+        </summary>
+        <div class="resp">
+          <p>Na maioria das casas, o investimento fica <b>entre R$&nbsp;14 mil e R$&nbsp;19 mil</b>, para um sistema de doze a vinte painéis. Depois da visita, você recebe três tamanhos de sistema para comparar.</p>
+          <p>Trabalhamos com dois bancos parceiros. <b>Entrada zero é possível</b>, e na maioria dos casos a parcela fica perto do valor que você já paga de luz hoje.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+<!-- P4:END -->
+</main>
+
+<!-- FOOT:START -->
+<footer class="foot" id="contato">
+  <figure class="foot__bg" aria-hidden="true">
+    <picture>
+      <source type="image/webp" media="(max-width: 820px)" srcset="img/footer-m-900.webp">
+      <source media="(max-width: 820px)" srcset="img/footer-m-900.jpg">
+      <source type="image/webp" srcset="img/footer-1200.webp 1200w, img/footer-2400.webp 2400w" sizes="100vw">
+      <img src="img/footer-2400.jpg" srcset="img/footer-1200.jpg 1200w, img/footer-2400.jpg 2400w" sizes="100vw" width="2400" height="1323" alt="" loading="lazy" decoding="async">
+    </picture>
+  </figure>
+  <div class="foot__scrim" aria-hidden="true"></div>
+
+  <div class="foot__cta">
+    <h2 class="rv" style="--i:0">É a sua vez de economizar com Energia Solar.</h2>
+    <div class="cta rv" style="--i:1">
+      <a class="btn" href="#simulacao" data-origem="rodape">
+        Simular minha economia
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10h12M10.5 4.5L16 10l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg>
+      </a>
+      <p class="cta__notes">
+        <strong>Ideal para contas a partir de <span class="nb">R$ 450/mês</span>.</strong>
+        <span>Resposta pelo WhatsApp no mesmo dia útil.</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="foot__base">
+    <div class="foot__id rv" style="--i:2">
+      <a class="foot__logo" href="./" aria-label="Ravena Solar, início da página">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="40 18 640 182" aria-hidden="true">
+          <circle cx="132" cy="96" r="46" fill="#F2A03D"/>
+          <g stroke="#F2A03D" stroke-width="9" stroke-linecap="round">
+            <line x1="132" y1="22" x2="132" y2="36"/><line x1="184" y1="44" x2="194" y2="34"/>
+            <line x1="80" y1="44" x2="70" y2="34"/><line x1="206" y1="96" x2="220" y2="96"/>
+            <line x1="58" y1="96" x2="44" y2="96"/>
+          </g>
+          <path d="M52 196 L104 118 L212 118 L264 196 Z" fill="#FFFFFF"/>
+          <g stroke="#123A55" stroke-width="4" opacity="0.7">
+            <line x1="88" y1="118" x2="70" y2="196"/><line x1="122" y1="118" x2="114" y2="196"/>
+            <line x1="158" y1="118" x2="158" y2="196"/><line x1="194" y1="118" x2="202" y2="196"/>
+            <line x1="92" y1="157" x2="238" y2="157"/>
+          </g>
+          <text x="316" y="118" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="82" font-weight="700" letter-spacing="2" fill="#FFFFFF">RAVENA</text>
+          <text x="320" y="182" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="46" font-weight="300" letter-spacing="16" fill="#F2A03D">SOLAR</text>
+        </svg>
+      </a>
+      <p>Energia solar para casas em Sorocaba, Votorantim, Itu e Salto.</p>
+    </div>
+
+    <address class="foot__contact rv" style="--i:3">
+      <p class="foot__h">Contato</p>
+      <span>Av. das Nações, 1420, sala 8</span>
+      <span>Sorocaba/SP — CEP 18000-000</span>
+      <a href="tel:+551532000000">(15) 3200-0000</a>
+      <a href="mailto:contato@ravenasolar.com.br">contato@ravenasolar.com.br</a>
+      <span>CNPJ 00.000.000/0001-00</span>
+    </address>
+
+    <nav class="foot__nav rv" style="--i:4" aria-label="Rodapé">
+      <p class="foot__h">Nesta página</p>
+      <a href="#caso">O caso de Sorocaba</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#duvidas">Dúvidas</a>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=Ravena+Solar+Sorocaba" target="_blank" rel="noopener">Avaliações no Google</a>
+    </nav>
+  </div>
+
+  <p class="foot__legal rv" style="--i:5">© 2026 Ravena Solar · Sorocaba, SP</p>
+</footer>
+<!-- FOOT:END -->
+
+<!-- Simulação: abre por cima da página. Sem JavaScript, o :target mostra o mesmo formulário. -->
+<dialog id="simulacao" aria-labelledby="sim-titulo">
+  <div class="sheet" data-step="form">
+    <div class="sheet__head">
+      <h2 id="sim-titulo">Simule sua economia</h2>
+      <a class="close" href="#" data-close aria-label="Fechar">
+        <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 3l12 12M15 3L3 15" stroke="currentColor" stroke-width="2.4"/></svg>
+      </a>
+    </div>
+    <p class="sheet__intro">Com esses quatro dados, nosso vendedor monta a simulação e te responde pelo WhatsApp no mesmo dia útil.</p>
+
+    <form id="sim-form" novalidate>
+      <input type="hidden" name="origem" value="hero">
+
+      <div class="field">
+        <label for="nome">Nome</label>
+        <input id="nome" name="nome" type="text" autocomplete="name" required>
+      </div>
+
+      <div class="field">
+        <label for="whatsapp">WhatsApp com DDD</label>
+        <input id="whatsapp" name="whatsapp" type="tel" inputmode="numeric" autocomplete="tel-national"
+               placeholder="(15) 99999-9999" required pattern="\(\d{2}\) 9\d{4}-\d{4}" aria-describedby="whatsapp-dica">
+        <small id="whatsapp-dica">Celular com DDD, por exemplo (15) 99123-4567.</small>
+      </div>
+
+      <div class="field">
+        <label for="cidade">Cidade</label>
+        <select id="cidade" name="cidade" required>
+          <option value="">Escolha a cidade</option>
+          <option>Sorocaba</option>
+          <option>Votorantim</option>
+          <option>Itu</option>
+          <option>Salto</option>
+          <option>Outra cidade da região</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="conta">Valor médio da conta de luz</label>
+        <div class="money"><span aria-hidden="true">R$</span>
+          <input id="conta" name="conta" type="text" inputmode="numeric" required aria-describedby="conta-aviso">
+        </div>
+        <p class="warn" id="conta-aviso" hidden>Para contas abaixo de R$ 450, a economia existe, mas o retorno costuma demorar mais. Você pode pedir a simulação mesmo assim.</p>
+      </div>
+
+      <div class="field">
+        <label for="anexo">Foto ou PDF da conta (opcional)</label>
+        <input id="anexo" name="anexo" type="file" accept="image/*,application/pdf" aria-describedby="anexo-dica">
+        <small id="anexo-dica">Ajuda a simulação sair mais precisa. Imagem ou PDF.</small>
+      </div>
+
+      <button class="btn" type="submit">Pedir minha simulação</button>
+      <p class="sheet__foot">Ideal para contas a partir de R$ 450/mês.</p>
+    </form>
+  </div>
+
+  <div class="sheet done" data-step="done" hidden>
+    <div class="sheet__head">
+      <h2>Pedido recebido</h2>
+      <a class="close" href="#" data-close aria-label="Fechar">
+        <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 3l12 12M15 3L3 15" stroke="currentColor" stroke-width="2.4"/></svg>
+      </a>
+    </div>
+    <p>Você recebe a resposta pelo WhatsApp no mesmo dia útil.</p>
+  </div>
+</dialog>
+
+<dialog id="aviso-conta" class="confirm" aria-labelledby="aviso-titulo">
+  <div class="sheet">
+    <h2 id="aviso-titulo">Com essa conta, não compensa</h2>
+    <p>Com uma conta abaixo de R$ 200, a energia solar não compensa: o sistema demora demais para se pagar. Preferimos te dizer isso agora do que te vender algo que não vale a pena.</p>
+    <div class="sheet__actions">
+      <button class="btn" type="button" data-corrigir>Corrigir o valor</button>
+      <button class="btn btn--quiet" type="button" data-enviar>Enviar mesmo assim</button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+(() => {
+  const dlg = document.getElementById('simulacao');
+  const aviso = document.getElementById('aviso-conta');
+  const form = document.getElementById('sim-form');
+  if (!dlg.showModal) return; // navegador antigo: fica o :target
+
+  const track = (evento, dados = {}) => {
+    // Métricas da spec: aberturas do popup e "Enviar mesmo assim".
+    (window.dataLayer = window.dataLayer || []).push({ event: evento, ...dados });
+  };
+
+  // Abrir pelo botão, guardando de qual CTA veio
+  document.querySelectorAll('a[href="#simulacao"]').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    form.origem.value = a.dataset.origem || 'desconhecida';
+    dlg.showModal();
+    track('simulacao_aberta', { origem: form.origem.value });
+  }));
+  if (location.hash === '#simulacao') { history.replaceState(null, '', location.pathname); dlg.showModal(); }
+
+  dlg.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', e => { e.preventDefault(); dlg.close(); }));
+  dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+
+  // Máscara do WhatsApp: (15) 99999-9999
+  const zap = form.whatsapp;
+  zap.addEventListener('input', () => {
+    const d = zap.value.replace(/\D/g, '').slice(0, 11);
+    let v = d;
+    if (d.length > 2) v = `(${d.slice(0, 2)}) ${d.slice(2)}`;
+    if (d.length > 7) v = `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
+    zap.value = v;
+  });
+
+  // Valor da conta: só números, aviso entre R$ 200 e R$ 449
+  const conta = form.conta, warn = document.getElementById('conta-aviso');
+  const valor = () => parseInt(conta.value.replace(/\D/g, ''), 10) || 0;
+  conta.addEventListener('input', () => {
+    const n = valor();
+    conta.value = n ? n.toLocaleString('pt-BR') : '';
+    warn.hidden = !(n >= 200 && n < 450);
+  });
+
+  const enviar = () => {
+    const dados = Object.fromEntries(new FormData(form));
+    dados.conta = valor();
+    // TODO: ligar ao destino real (planilha, CRM ou e-mail do vendedor) antes de publicar.
+    track('simulacao_enviada', { origem: dados.origem, conta: dados.conta });
+    dlg.querySelector('[data-step=form]').hidden = true;
+    dlg.querySelector('[data-step=done]').hidden = false;
+  };
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    if (valor() < 200) { aviso.showModal(); track('popup_conta_baixa'); return; }
+    enviar();
+  });
+
+  aviso.querySelector('[data-corrigir]').addEventListener('click', () => { aviso.close(); conta.focus(); conta.select(); });
+  aviso.querySelector('[data-enviar]').addEventListener('click', () => { aviso.close(); track('enviar_mesmo_assim'); enviar(); });
+})();
+</script>
+<!-- P2:JS:START -->
+<script>
+(() => {
+  document.documentElement.classList.add('js');
+  const drop = document.querySelector('#caso .drop');
+  if (!drop) return;
+  // Anima quando o gráfico entra na tela. A checagem por rolagem é a rede de segurança:
+  // se o observer não disparar, a barra nunca fica parada mostrando 780 no lugar de 118.
+  const inView = () => { const r = drop.getBoundingClientRect(); return r.top < innerHeight * .8 && r.bottom > innerHeight * .2; };
+  let io;
+  const show = () => { drop.classList.add('in'); removeEventListener('scroll', check); if (io) io.disconnect(); };
+  const check = () => { if (inView()) show(); };
+  addEventListener('scroll', check, { passive: true });
+  if ('IntersectionObserver' in window) {
+    io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) show(); }, { threshold: .35 });
+    io.observe(drop);
+  }
+  check();
+})();
+</script>
+<!-- P2:JS:END -->
+<!-- P3:JS:START -->
+<script>
+(() => {
+  const sec = document.getElementById('como-funciona');
+  if (!sec) return;
+  document.documentElement.classList.add('js');
+
+  const tabs = [...sec.querySelectorAll('[role=tab]')];
+  const fases = [...sec.querySelectorAll('.fase')];
+  const fotos = [...sec.querySelectorAll('.foto')];
+  const prev = sec.querySelector('.seta--prev'), next = sec.querySelector('.seta--next');
+  const palco = sec.querySelector('.palco__fotos');
+  let atual = -1;
+
+  function go(i, foco) {
+    i = (i + fases.length) % fases.length;           // da última volta para a primeira
+    if (i === atual) return;
+    sec.style.setProperty('--dx', atual > -1 && i < atual && !(atual === fases.length - 1 && i === 0) ? '-40px' : '40px');
+    atual = i;
+    fases.forEach((f, k) => { f.classList.toggle('on', k === i); f.hidden = false; });
+    fotos.forEach((f, k) => f.classList.toggle('on', k === i));
+    tabs.forEach((t, k) => {
+      t.setAttribute('aria-selected', k === i);
+      t.tabIndex = k === i ? 0 : -1;
+    });
+    fases.forEach((f, k) => f.setAttribute('aria-hidden', k !== i));
+    prev.disabled = i === 0;
+    if (foco) tabs[i].focus();
+  }
+
+  tabs.forEach((t, k) => {
+    t.addEventListener('click', () => go(k));
+    t.addEventListener('keydown', e => {
+      const d = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
+      if (d) { e.preventDefault(); go(Math.max(0, Math.min(tabs.length - 1, k + d)), true); }
+      if (e.key === 'Home') { e.preventDefault(); go(0, true); }
+      if (e.key === 'End') { e.preventDefault(); go(tabs.length - 1, true); }
+    });
+  });
+  prev.addEventListener('click', () => go(atual - 1));
+  next.addEventListener('click', () => go(atual + 1));
+
+  // Arrastar a foto para o lado no celular
+  let x0 = null, y0 = null;
+  palco.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') { x0 = e.clientX; y0 = e.clientY; } });
+  palco.addEventListener('pointerup', e => {
+    if (x0 === null) return;
+    const dx = e.clientX - x0, dy = e.clientY - y0; x0 = null;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) go(atual + (dx < 0 ? 1 : -1));
+  });
+  palco.addEventListener('pointercancel', () => { x0 = null; });
+
+  sec.querySelector('.fases').hidden = false;
+  fases.forEach(f => { f.tabIndex = 0; });           // painel de aba alcançável pelo teclado (só com JS, quando as abas existem)
+  prev.hidden = next.hidden = false;
+  sec.classList.add('init');
+  go(0);
+  requestAnimationFrame(() => requestAnimationFrame(() => sec.classList.remove('init')));
+})();
+</script>
+<!-- P3:JS:END -->
+<!-- FOOT:JS:START -->
+<script>
+(() => {
+  const foot = document.querySelector('.foot');
+  if (!foot) return;
+  document.documentElement.classList.add('js');
+  // Revela quando o rodapé entra na tela; a checagem por rolagem é a rede de segurança.
+  const inView = () => foot.getBoundingClientRect().top < innerHeight * .75;
+  let io;
+  const show = () => { foot.classList.add('in'); removeEventListener('scroll', check); if (io) io.disconnect(); };
+  const check = () => { if (inView()) show(); };
+  addEventListener('scroll', check, { passive: true });
+  if ('IntersectionObserver' in window) {
+    io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) show(); }, { threshold: .25 });
+    io.observe(foot);
+  }
+  check();
+})();
+</script>
+<!-- FOOT:JS:END -->
+<!-- NAV:JS:START -->
+<script>
+(() => {
+  const nav = document.querySelector('.nav');
+  if (!nav) return;
+  const menu = nav.querySelector('.nav__menu');
+  const links = [...nav.querySelectorAll('.nav__links a')];
+  const mobile = matchMedia('(max-width: 820px)');
+
+  // Menu do celular
+  const abrir = (sim) => {
+    nav.classList.toggle('open', sim);
+    menu.setAttribute('aria-expanded', sim);
+    menu.setAttribute('aria-label', sim ? 'Fechar índice da página' : 'Abrir índice da página');
+  };
+  menu.hidden = false;
+  menu.addEventListener('click', () => abrir(!nav.classList.contains('open')));
+  links.forEach(a => a.addEventListener('click', () => abrir(false)));
+  addEventListener('keydown', e => { if (e.key === 'Escape' && nav.classList.contains('open')) { abrir(false); menu.focus(); } });
+  document.addEventListener('click', e => { if (!nav.contains(e.target)) abrir(false); });
+  mobile.addEventListener('change', () => abrir(false));
+
+  // Destaque da seção em que o leitor está: a última cuja borda de cima já passou da linha logo abaixo da barra
+  const alvos = links.map(a => document.querySelector(a.getAttribute('href')));
+  let tick = false;
+  const marcar = () => {
+    tick = false;
+    const linha = nav.offsetHeight + innerHeight * .25;
+    let ativo = -1;
+    alvos.forEach((s, i) => { if (s && s.getBoundingClientRect().top <= linha) ativo = i; });
+    // No fim da página o rodapé nunca chega à linha: a última seção vale
+    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) ativo = alvos.length - 1;
+    links.forEach((a, i) => i === ativo ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current'));
+  };
+  addEventListener('scroll', () => { if (!tick) { tick = true; requestAnimationFrame(marcar); } }, { passive: true });
+  addEventListener('resize', marcar);
+  marcar();
+})();
+</script>
+<!-- NAV:JS:END -->
+</body>
+</html>
