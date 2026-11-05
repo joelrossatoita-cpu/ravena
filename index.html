@@ -227,7 +227,9 @@
   .sheet .btn { width: 100%; justify-content: center; margin-top: 8px; }
   .sheet__foot { margin: 14px 0 0; text-align: center; font-size: 1rem; }
   .done { text-align: left; }
-  .done p { font-size: var(--t-lead); }
+  .done h2 { font-size: calc(1.75rem * .85); }   /* -15% */
+  .done p { font-size: calc(var(--t-lead) * .85); }
+  .done .btn { font-size: calc(1.1875rem * .85); }
   .confirm .sheet__actions { display: grid; gap: 12px; margin-top: 24px; }
   .btn--quiet { background: var(--ceu); }
   .btn--quiet:hover { background: #DDE5EE; }
@@ -619,7 +621,7 @@
   </a>
   <nav aria-label="Seções da página">
     <ul class="nav__links" id="nav-links">
-      <li><a href="#caso">O caso de Sorocaba</a></li>
+      <li><a href="#caso">Clientes</a></li>
       <li><a href="#como-funciona">Como funciona</a></li>
       <li><a href="#duvidas">Dúvidas</a></li>
       <li><a href="#contato">Contato</a></li>
@@ -674,7 +676,7 @@
             <svg viewBox="0 0 20 20" aria-hidden="true"><defs><clipPath id="quase"><rect width="16" height="20"/></clipPath></defs><path fill="#E5D3C2" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 6L10 14.8 4.6 17.8l1.2-6L1.4 7.7l6-.7z"/><path fill="#E8721C" clip-path="url(#quase)" d="M10 1.5l2.6 5.5 6 .7-4.4 4.1 1.2 6L10 14.8 4.6 17.8l1.2-6L1.4 7.7l6-.7z"/></svg>
           </span>
         </span>
-        <a class="proof__label" href="https://www.google.com/maps/search/?api=1&amp;query=Ravena+Solar+Sorocaba" target="_blank" rel="noopener">137 avaliações no Google</a>
+        <span class="proof__label">137 avaliações no Google</span>
       </li>
       <li>
         <span class="proof__num">412</span>
@@ -768,7 +770,7 @@
           <h3 id="fase-antes-t">Antes de assinar, você não paga nada.</h3>
           <ul class="lista">
             <li><b>Simulação.</b> Você manda nome, WhatsApp, cidade e o valor da conta. A resposta chega no mesmo dia útil.</li>
-            <li><b>Visita técnica.</b> Um técnico mede o seu telhado, sem custo e sem compromisso.</li>
+            <li><b>Visita técnica.</b> Nosso técnico mede o seu telhado, sem custo e sem compromisso.</li>
             <li><b>Proposta.</b> Três tamanhos de sistema para comparar. Na maioria das casas, de R$&nbsp;14 mil a R$&nbsp;19 mil.</li>
           </ul>
         </div>
@@ -946,6 +948,7 @@
       <p>Energia solar para casas em Sorocaba, Votorantim, Itu e Salto.</p>
     </div>
 
+    <!-- ATENÇÃO: telefone, endereço, e-mail, CEP e CNPJ abaixo vieram do site antigo e NÃO foram confirmados. Ver CONFERIR-NA-ENTREGA.md. -->
     <address class="foot__contact rv" style="--i:3">
       <p class="foot__h">Contato</p>
       <span>Av. das Nações, 1420, sala 8</span>
@@ -957,10 +960,9 @@
 
     <nav class="foot__nav rv" style="--i:4" aria-label="Rodapé">
       <p class="foot__h">Nesta página</p>
-      <a href="#caso">O caso de Sorocaba</a>
+      <a href="#caso">Economia de nossos clientes</a>
       <a href="#como-funciona">Como funciona</a>
       <a href="#duvidas">Dúvidas</a>
-      <a href="https://www.google.com/maps/search/?api=1&amp;query=Ravena+Solar+Sorocaba" target="_blank" rel="noopener">Avaliações no Google</a>
     </nav>
   </div>
 
@@ -977,7 +979,7 @@
         <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 3l12 12M15 3L3 15" stroke="currentColor" stroke-width="2.4"/></svg>
       </a>
     </div>
-    <p class="sheet__intro">Com esses quatro dados, nosso vendedor monta a simulação e te responde pelo WhatsApp no mesmo dia útil.</p>
+    <p class="sheet__intro">Com esses quatro dados, nosso vendedor monta a simulação e te responde pelo WhatsApp no mesmo dia útil. Depois de enviar, você pode agilizar o contato com uma mensagem pronta no WhatsApp.</p>
 
     <form id="sim-form" novalidate>
       <input type="hidden" name="origem" value="hero">
@@ -1020,8 +1022,13 @@
         <small id="anexo-dica">Ajuda a simulação sair mais precisa. Imagem ou PDF.</small>
       </div>
 
+      <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden">
+        <label>Não preencha este campo <input name="website" type="text" tabindex="-1" autocomplete="off"></label>
+      </div>
+
       <button class="btn" type="submit">Pedir minha simulação</button>
       <p class="sheet__foot">Ideal para contas a partir de R$ 450/mês.</p>
+      <p class="sheet__foot">Ao enviar, você autoriza a Ravena a usar esses dados para fazer sua simulação e te responder pelo WhatsApp.</p>
     </form>
   </div>
 
@@ -1032,7 +1039,9 @@
         <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3 3l12 12M15 3L3 15" stroke="currentColor" stroke-width="2.4"/></svg>
       </a>
     </div>
-    <p>Você recebe a resposta pelo WhatsApp no mesmo dia útil.</p>
+    <p>Recebemos seus dados e você recebe a resposta pelo WhatsApp no mesmo dia útil.</p>
+    <p>Quer agilizar? Envie a mensagem que deixamos pronta no WhatsApp e a conversa com o vendedor já começa por lá.</p>
+    <a class="btn" id="abrir-wa" href="#" target="_blank" rel="noopener">Enviar no WhatsApp</a>
   </div>
 </dialog>
 
@@ -1090,14 +1099,61 @@
     warn.hidden = !(n >= 200 && n < 450);
   });
 
+  // TODO antes de publicar: preencher com a URL do Web App (apps-script/Code.gs)
+  // e com o WhatsApp da Ravena Solar no formato 55DDNUMERO, só dígitos.
+  const ENDPOINT = 'https://script.google.com/macros/s/AKfycbw6ojfevCPfTBf53iBx5fgOHH0w62Mg4rqqrGlf1j8jrb26DgtVqHMYeeNnu0q4Ga5xsQ/exec';
+  const WA_NUMERO = '5515990000000';
+  const MAX_ANEXO = 5 * 1024 * 1024;
+
+  form.anexo.addEventListener('change', () => {
+    const a = form.anexo.files[0];
+    form.anexo.setCustomValidity(a && a.size > MAX_ANEXO ? 'O arquivo passa de 5 MB. Escolha um menor ou deixe em branco.' : '');
+  });
+
+  const lerBase64 =arq => new Promise(ok => {
+    const r = new FileReader();
+    r.onload = () => ok({ nome: arq.name, tipo: arq.type, base64: String(r.result).split(',')[1] });
+    r.onerror = () => ok(null);
+    r.readAsDataURL(arq);
+  });
+
+  const linkWhatsApp = (d, comAnexo) => {
+    const linhas = [
+      'Olá, Ravena Solar! Quero uma simulação de energia solar.',
+      '',
+      `Nome: ${d.nome}`,
+      `Cidade: ${d.cidade}`,
+      `Conta de luz: R$ ${d.conta.toLocaleString('pt-BR')} por mês`,
+      `WhatsApp: ${d.whatsapp}`,
+    ];
+    if (comAnexo) linhas.push('', 'Vou enviar a foto da conta por aqui.');
+    return `https://wa.me/${WA_NUMERO}?text=${encodeURIComponent(linhas.join('\n'))}`;
+  };
+
   const enviar = () => {
     const dados = Object.fromEntries(new FormData(form));
+    const arquivo = form.anexo.files[0];
+    const anexo = arquivo && arquivo.size <= MAX_ANEXO ? arquivo : null;
     dados.conta = valor();
-    // TODO: ligar ao destino real (planilha, CRM ou e-mail do vendedor) antes de publicar.
+    delete dados.anexo;
+
+    // O WhatsApp só abre quando o cliente clica no botão da tela final.
+    document.getElementById('abrir-wa').href = linkWhatsApp(dados, !!arquivo);
+
+    // Planilha e Drive: envio em segundo plano, não segura o cliente.
+    (async () => {
+      if (anexo) dados.anexo = await lerBase64(anexo);
+      if (ENDPOINT) {
+        fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', keepalive: true, body: JSON.stringify(dados) }).catch(() => {});
+      }
+    })();
+
     track('simulacao_enviada', { origem: dados.origem, conta: dados.conta });
     dlg.querySelector('[data-step=form]').hidden = true;
     dlg.querySelector('[data-step=done]').hidden = false;
   };
+
+  document.getElementById('abrir-wa').addEventListener('click', () => track('whatsapp_aberto', { origem: form.origem.value }));
 
   form.addEventListener('submit', e => {
     e.preventDefault();
