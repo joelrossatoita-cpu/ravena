@@ -1,6 +1,6 @@
 # Spec: página de venda da Ravena Solar
 
-> Uma página só, em cinco seções, para energia solar residencial. Todo número citado aqui vem do `brief.md`. Se um dado não está no brief, ele não entra na página.
+> Uma página só, em cinco seções, para energia solar residencial. Todo número citado aqui vem do `brief.md`. Se um dado não está no brief, ele não entra na página. A única exceção são os dados de contato do rodapé, que vêm do site anterior e foram validados pelo cliente (ver §6).
 
 ---
 
@@ -169,6 +169,10 @@ As respostas usam só informação do brief. Use acordeão para a página não f
 | Financiamento | 2 bancos, entrada zero possível | `brief.md`, "O que vendemos" |
 | Resposta da simulação | mesmo dia útil, por WhatsApp | `brief.md`, "O que queremos que aconteça" |
 | Metas | de 12 para 25 simulações por mês | `brief.md`, "O que queremos que aconteça" |
+| Endereço | Av. das Nações, 1420, sala 8, Sorocaba/SP, CEP 18000-000 | site anterior da Ravena (2021), validado pelo cliente em 05/11/2026 |
+| Telefone | (15) 3200-0000 | site anterior da Ravena (2021), validado pelo cliente em 05/11/2026 |
+| E-mail | contato@ravenasolar.com.br | site anterior da Ravena (2021), validado pelo cliente em 05/11/2026 |
+| CNPJ | 00.000.000/0001-00 | site anterior da Ravena (2021), validado pelo cliente em 05/11/2026 |
 | Logo | SVG e PNG | `logos/logo.svg`, `logos/logo.png` |
 | Cores da marca | `#123A55` (azul), `#F2A03D` (sol), `#E8721C` (laranja), `#FFFFFF` | lidas de `logos/logo.svg`. O brief pede para sempre pegar as cores do arquivo, nunca de memória. |
 
@@ -178,4 +182,5 @@ As respostas usam só informação do brief. Use acordeão para a página não f
 - **"Visita técnica grátis".** O brief proíbe a palavra "grátis", então a página usa "visita técnica sem custo".
 - **Homologação.** Não aparece no ciclo do pedido, mas é a etapa mais longa. Entra dentro de "Projeto", para explicar o prazo de 45 a 60 dias.
 - **Conta de luz ilustrada.** A primeira versão desenhava uma conta da CPFL com a marca, o CNPJ e o endereço reais da distribuidora, e mostrava R$ 118,00 como se fosse um mês só, quando R$ 118 é a média de 12 meses. Isso parece documento real e afirma algo falso. Foi trocada por barras na proporção real, com a média dita por extenso.
+- **Dados de contato no rodapé.** O brief não traz endereço, telefone, e-mail nem CNPJ. **Decisão do cliente (05/11/2026):** os dados vêm do site anterior da Ravena e estão validados, então ficam no rodapé (fontes em §6).
 - **Vídeos e fotos.** O brief diz que existem, mas os arquivos não estão no projeto. Ficam fora até chegarem com autorização. Mesmo quando chegarem, depoimento só entra se for o vídeo real.

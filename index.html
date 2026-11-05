@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ravena Solar · Energia solar para sua casa em Sorocaba e região</title>
-<meta name="description" content="Instalamos energia solar na sua casa com equipe própria. Na média dos nossos clientes, a conta de luz cai de 75% a 90%. Projeto, homologação na CPFL e instalação em Sorocaba, Votorantim, Itu e Salto.">
+<meta name="description" content="Instalamos energia solar na sua casa com equipe própria. Na média dos nossos clientes, a conta de luz cai de 75% a 90%. Projeto, aprovação da CPFL e instalação em Sorocaba, Votorantim, Itu e Salto.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -80,7 +80,7 @@
     .nav .nav__cta .curto { display: inline; }
   }
   .nav__links a:hover { background: #DDE5EE; color: var(--azul); }
-  .nav__links a[aria-current="true"] { background: var(--azul); color: var(--branco); }
+  .nav__links a[aria-current="location"] { background: var(--azul); color: var(--branco); }
   .nav .nav__cta { flex: none; min-height: 48px; padding: 0 22px; gap: 10px; font-size: 1.0625rem; }
   .nav__cta .curto { display: none; }
   .nav__menu {
@@ -111,8 +111,8 @@
     width: 72%;
     margin: 0;
     /* O fade pedido: a foto some no branco antes de chegar ao texto. taste-skill-ignore */
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 20%, #000 60%); /* taste-skill-ignore */
-            mask-image: linear-gradient(to right, transparent 0%, transparent 20%, #000 60%); /* taste-skill-ignore */
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 26%, #000 64%); /* taste-skill-ignore */
+            mask-image: linear-gradient(to right, transparent 0%, transparent 26%, #000 64%); /* taste-skill-ignore */
   }
   .hero__media img {
     width: 100%; height: 100%;
@@ -155,7 +155,9 @@
     font-variant-numeric: tabular-nums;
   }
   .proof__label { font-size: 1rem; color: var(--ink-soft); }
-  .proof a { text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  .proof a { display: inline-flex; align-items: center; min-height: 44px; width: fit-content; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  .proof li { gap: 0; }
+  .proof__num { margin-bottom: 4px; }
   .proof a:hover { color: var(--azul); text-decoration-thickness: 2px; }
   .stars { display: flex; gap: 2px; }
   .stars svg { width: 20px; height: 20px; }
@@ -274,7 +276,9 @@
   @media (max-width: 420px) {
     .nav__logo { width: 118px; }
     .nav .nav__cta { padding: 0 14px; font-size: 1rem; }
-    .proof { flex-direction: column; }
+    /* A nota ocupa a linha; 412 e 6 anos lado a lado, para a prova não empurrar o resto para baixo */
+    .proof { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px 20px; }
+    .proof li:first-child { grid-column: 1 / -1; }
     .sheet { padding: 24px 20px 20px; }
   }
 
@@ -300,7 +304,7 @@
     -webkit-box-decoration-break: clone; box-decoration-break: clone;
     background: #FBDDB0; box-shadow: .18em 0 0 #FBDDB0, -.18em 0 0 #FBDDB0; /* taste-skill-ignore: extensão do marca-texto, não sombra */
   }
-  .p2 p { margin: 18px 0 0; font-size: 1.0625rem; line-height: 1.5; max-width: 34em; }
+  .p2 p { margin: 18px 0 0; font-size: 1.0625rem; line-height: 1.5; max-width: 34em; text-wrap: pretty; }
   .p2 p strong { font-weight: 700; }
   .nb { white-space: nowrap; }
   .cta__notes .nb { display: inline; color: inherit; }
@@ -396,7 +400,9 @@
   .fase + .fase { margin-top: 56px; }
   .fase h3 { margin: 0; font-size: clamp(1.5rem, 1rem + 1.3vw, 2.25rem); font-weight: 800; line-height: 1.12; letter-spacing: -0.03em; text-wrap: balance; }
   .lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
-  .lista li { font-size: 1.0625rem; line-height: 1.5; }
+  .lista li { font-size: 1.0625rem; line-height: 1.5; text-wrap: pretty; }
+  /* A etapa em que o sistema liga é o destaque da sequência (SPEC 3.3); o recuo negativo mantém o texto alinhado */
+  .lista li.destaque { background: #FDF0DD; padding: 14px 16px; margin: 0 -16px; }
   .lista b { font-weight: 800; }
 
   .palco__ctl { margin-top: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
@@ -411,6 +417,7 @@
   .seta svg { width: 20px; height: 20px; }
   .seta[hidden] { display: none; }
   .palco__ctl .seta--prev { margin-left: auto; }  /* CTA à esquerda, setas à direita */
+  .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
 
   /* Faixa de prazo e garantia: embaixo do palco, no mesmo desenho da prova do hero */
   .garantias {
@@ -462,6 +469,7 @@
     .palco { grid-template-columns: minmax(0, 1fr); }
     .palco__fotos, .palco__txt { grid-column: 1 / -1; grid-row: auto; }
     .palco__txt { gap: 24px; }
+    .palco__ctl .seta { display: none; }   /* no celular as setas ficam longe da foto: trocam-se as fases pelas abas e arrastando */
     .garantias { grid-template-columns: minmax(0, 1fr); }
     .garantias li { flex-direction: row; align-items: baseline; gap: 12px; }
     .garantias__num { flex: none; min-width: 5.6em; font-size: 1.375rem; }
@@ -486,11 +494,11 @@
   /* ---------- Página 4: perguntas frequentes (acordeão, como a Lemon) ---------- */
   .p4 { padding: 0 var(--margin) clamp(72px, 8vw, 128px); }
   .faq { max-width: 860px; margin: 0 auto; display: grid; gap: 40px; }
-  .faq__head { text-align: center; }
+  .faq__head { text-align: left; }
   .faq__head p { margin-left: auto; margin-right: auto; }
   .p4 h2 {
     margin: 0; font-size: clamp(1.75rem, 1rem + 2vw, 2.9rem); font-weight: 800;
-    line-height: 1.1; letter-spacing: -0.035em; text-wrap: balance; margin-inline: auto; max-width: 14em;
+    line-height: 1.1; letter-spacing: -0.035em; text-wrap: balance; max-width: 14em;
   }
   .faq__head p { margin: 20px auto 0; font-size: 1.0625rem; line-height: 1.5; max-width: 32em; }
   .qa { display: grid; gap: 8px; }
@@ -499,14 +507,14 @@
   .qa summary {
     display: flex; align-items: center; justify-content: space-between; gap: 24px;
     min-height: 68px; padding: 16px 24px; cursor: pointer; list-style: none;
-    font-size: clamp(1.0625rem, .95rem + .4vw, 1.25rem); font-weight: 700; line-height: 1.25; letter-spacing: -0.01em;
+    font-size: clamp(1.0625rem, .95rem + .4vw, 1.25rem); font-weight: 700; line-height: 1.3; letter-spacing: -0.01em;
   }
   .qa summary::-webkit-details-marker { display: none; }
   .qa summary svg { flex: none; width: 20px; height: 20px; transition: transform .3s var(--ease); }
   .qa details[open] summary svg { transform: rotate(180deg); }
   .qa details[open] { background: var(--ceu); }
   .qa .resp { padding: 0 24px 26px; max-width: 40em; animation: txt-in .5s var(--ease) both; --dx: 0px; }
-  .qa .resp p { margin: 0; font-size: 1.0625rem; line-height: 1.55; }
+  .qa .resp p { margin: 0; font-size: 1.0625rem; line-height: 1.55; text-wrap: pretty; }
   .qa .resp p + p { margin-top: 12px; }
   .qa .resp b { font-weight: 800; }
   @media (prefers-reduced-motion: reduce) {
@@ -525,8 +533,8 @@
   }
   /* A página branca vira céu antes de chegar ao texto. taste-skill-ignore */
   .foot__bg { position: absolute; inset: 0; z-index: -2; margin: 0; display: block;
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 26%); /* taste-skill-ignore */
-            mask-image: linear-gradient(to bottom, transparent 0%, #000 26%); /* taste-skill-ignore */
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 110px); /* taste-skill-ignore */
+            mask-image: linear-gradient(to bottom, transparent 0, #000 110px); /* taste-skill-ignore */
   }
   .foot__bg picture { display: block; width: 100%; height: 100%; }
   .foot__bg img {
@@ -535,15 +543,17 @@
     transition: transform 2.6s var(--ease);
   }
   /* Faixa neutra sob o texto dos dados, sobre os painéis. taste-skill-ignore */
+  /* Véu em azul da marca sobre a foto inteira, mais fundo embaixo: o texto branco passa de 4,5:1 em qualquer largura.
+     A passagem do branco para o céu termina antes do título (máscara de 110 px, menor que o padding de cima). taste-skill-ignore */
   .foot__scrim { position: absolute; inset: 0; z-index: -1; pointer-events: none;
-    background: linear-gradient(to bottom, rgba(0,0,0,0) 52%, rgba(0,0,0,.55) 78%, rgba(0,0,0,.72) 100%); /* taste-skill-ignore */
+    background: linear-gradient(to bottom, rgba(18,58,85,0) 0%, rgba(18,58,85,.5) 12%, rgba(18,58,85,.5) 50%, rgba(18,58,85,.75) 75%, rgba(18,58,85,.85) 100%); /* taste-skill-ignore */
   }
+  .foot .cta__notes span { color: var(--branco); }
   .foot h2 {
     margin: 0; font-size: clamp(1.9rem, 1rem + 3vw, 4rem); font-weight: 800;
     line-height: 1.06; letter-spacing: -0.035em; text-wrap: balance; max-width: 14em;
   }
   .foot__cta .cta { margin-top: 36px; }
-  .foot .cta__notes span { color: var(--branco); }
   .foot__base {
     display: grid; grid-template-columns: repeat(12, minmax(0, 1fr));
     column-gap: clamp(24px, 2.4vw, 40px); row-gap: 40px; align-items: start;
@@ -609,7 +619,7 @@
   </a>
   <nav aria-label="Seções da página">
     <ul class="nav__links" id="nav-links">
-      <li><a href="#caso">O caso real</a></li>
+      <li><a href="#caso">O caso de Sorocaba</a></li>
       <li><a href="#como-funciona">Como funciona</a></li>
       <li><a href="#duvidas">Dúvidas</a></li>
       <li><a href="#contato">Contato</a></li>
@@ -684,8 +694,8 @@
     <div class="case">
       <div>
         <h2 id="caso-t"><span>Em Sorocaba, a conta de R$ 780 virou R$ 118.</span></h2>
-        <p>Uma das 412 casas que instalamos na região. Uma casa comum, como a sua, com a Energia Solar ligada em março de 2025. Em 1 ano, a média da conta de luz diminuiu em 85%, reduzindo para uma média de R$&nbsp;118 mensais.</p>
-        <p>E tudo isso instalado <strong>exclusivamente pela equipe da Ravena</strong>, sem preocupações para o cliente.</p>
+        <p>Uma das 412 casas que instalamos na região: um sistema de 6,4&nbsp;kWp (o tamanho do sistema), ligado em março de 2025. Na média dos 12 meses seguintes, a conta ficou em <span class="nb">R$ 118</span>: 85% a menos, dentro dos 75% a 90% de queda que vemos na média dos nossos clientes.</p>
+        <p>Quem instalou foi a <strong>nossa equipe, com carteira assinada</strong>. No primeiro ano acompanhamos a produção, e somos assistência técnica autorizada da marca do inversor, o aparelho que converte a energia dos painéis para a sua casa.</p>
       </div>
 
       <figure class="drop" aria-labelledby="drop-legenda">
@@ -758,7 +768,7 @@
           <h3 id="fase-antes-t">Antes de assinar, você não paga nada.</h3>
           <ul class="lista">
             <li><b>Simulação.</b> Você manda nome, WhatsApp, cidade e o valor da conta. A resposta chega no mesmo dia útil.</li>
-            <li><b>Visita técnica.</b> Um técnico nosso mede o seu telhado, sem custo e sem compromisso.</li>
+            <li><b>Visita técnica.</b> Um técnico mede o seu telhado, sem custo e sem compromisso.</li>
             <li><b>Proposta.</b> Três tamanhos de sistema para comparar. Na maioria das casas, de R$&nbsp;14 mil a R$&nbsp;19 mil.</li>
           </ul>
         </div>
@@ -767,18 +777,20 @@
           <ul class="lista">
             <li><b>Assinatura.</b> À vista ou financiado por dois bancos parceiros. Entrada zero é possível.</li>
             <li><b>Projeto.</b> Desenhamos o sistema e cuidamos da aprovação da CPFL, a parte mais longa do prazo.</li>
-            <li><b>Instalação.</b> Dois dias no seu telhado, com equipe própria. Infiltração causada pela obra tem garantia de 5 anos.</li>
+            <li><b>Instalação.</b> Dois dias de obra no seu telhado. Se a obra causar infiltração, a garantia de 5 anos cobre.</li>
           </ul>
         </div>
         <div class="fase" id="fase-ligado" role="tabpanel" aria-labelledby="tab-ligado">
           <h3 id="fase-ligado-t">Ligado, e a gente continua por perto.</h3>
           <ul class="lista">
             <li><b>Vistoria e ligação.</b> A CPFL confere a instalação e libera o sistema. Da assinatura até aqui: de 45 a 60 dias.</li>
-            <li><b>Funcionamento.</b> A conta cai de 75% a 90% na média dos nossos clientes. Não zera: sempre resta a taxa mínima e o custo do fio.</li>
+            <li class="destaque"><b>Funcionamento.</b> A conta cai de 75% a 90% na média dos nossos clientes. Não zera: sempre resta a taxa mínima e o custo do fio.</li>
             <li><b>Acompanhamento.</b> No primeiro ano, acompanhamos a produção e ligamos se cair fora do previsto. Garantia de 25 anos no painel e 10 no inversor.</li>
           </ul>
         </div>
       </div>
+
+      <p class="sr-only" id="fase-status" aria-live="polite"></p>
 
       <div class="palco__ctl">
         <a class="btn" href="#simulacao" data-origem="como-funciona">
@@ -807,7 +819,7 @@
 <section class="p4" id="duvidas" aria-labelledby="faq-t">
   <div class="faq">
     <div class="faq__head">
-      <h2 id="faq-t">Dúvidas Frequentes</h2>
+      <h2 id="faq-t">Dúvidas frequentes</h2>
     </div>
 
     <div class="qa">
@@ -834,8 +846,8 @@
           <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 7.5l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></svg>
         </summary>
         <div class="resp">
-          <p>Vale. Desde a Lei 14.300, existe uma cobrança sobre a energia que o seu sistema manda para a rede, e ela aumenta ano a ano. Ou seja, o cálculo mudou, e quase ninguém explica direito como.</p>
-          <p>O que vemos hoje: na média dos nossos clientes, a conta cai de <b>75% a 90%</b> e o investimento volta em <b>3 a 4 anos</b>. Na simulação, o nosso vendedor faz a conta com o valor da sua conta de luz, não com uma promessa genérica.</p>
+          <p>Vale. Desde a Lei 14.300, a energia que o seu sistema manda para a rede durante o dia paga uma pequena cobrança, que aumenta um pouco a cada ano. Na prática, o que sobra de energia rende um pouco menos de crédito do que rendia antes.</p>
+          <p>Mesmo com essa cobrança, o que vemos hoje: na média dos nossos clientes, a conta cai de <b>75% a 90%</b> e o investimento volta em <b>3 a 4 anos</b>. Na simulação, o nosso vendedor faz a conta com o valor da sua conta de luz, não com uma promessa genérica.</p>
         </div>
       </details>
       <details>
@@ -1133,10 +1145,13 @@
   const palco = sec.querySelector('.palco__fotos');
   let atual = -1;
 
+  const status = sec.querySelector('#fase-status');
+
   function go(i, foco) {
-    i = (i + fases.length) % fases.length;           // da última volta para a primeira
+    i = Math.max(0, Math.min(fases.length - 1, i));   // sem dar a volta: setas, teclado e arrastar param nas pontas
     if (i === atual) return;
-    sec.style.setProperty('--dx', atual > -1 && i < atual && !(atual === fases.length - 1 && i === 0) ? '-40px' : '40px');
+    const primeira = atual === -1;
+    sec.style.setProperty('--dx', !primeira && i < atual ? '-40px' : '40px');
     atual = i;
     fases.forEach((f, k) => { f.classList.toggle('on', k === i); f.hidden = false; });
     fotos.forEach((f, k) => f.classList.toggle('on', k === i));
@@ -1145,7 +1160,14 @@
       t.tabIndex = k === i ? 0 : -1;
     });
     fases.forEach((f, k) => f.setAttribute('aria-hidden', k !== i));
+    // Seta desativada com o foco nela: o foco passa para a outra seta
+    const fim = i === fases.length - 1;
+    if (document.activeElement === prev && i === 0) next.focus();
+    if (document.activeElement === next && fim) prev.focus();
     prev.disabled = i === 0;
+    next.disabled = fim;
+    // Anuncia a troca ao leitor de tela (não na carga da página)
+    if (!primeira) status.textContent = `Fase ${i + 1} de ${fases.length}: ${tabs[i].textContent}`;
     if (foco) tabs[i].focus();
   }
 
@@ -1232,7 +1254,7 @@
     alvos.forEach((s, i) => { if (s && s.getBoundingClientRect().top <= linha) ativo = i; });
     // No fim da página o rodapé nunca chega à linha: a última seção vale
     if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) ativo = alvos.length - 1;
-    links.forEach((a, i) => i === ativo ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current'));
+    links.forEach((a, i) => i === ativo ? a.setAttribute('aria-current', 'location') : a.removeAttribute('aria-current'));
   };
   addEventListener('scroll', () => { if (!tick) { tick = true; requestAnimationFrame(marcar); } }, { passive: true });
   addEventListener('resize', marcar);
